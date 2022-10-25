@@ -24,7 +24,7 @@ def predict_IT():
     float_features = [float(x) for x in request.form.values()]
     features = [np.array(float_features)]
     prediction = model_IT.predict(features)
-    return render_template("predictIT.html", prediction_text = "You will land your 1st job as members of the {}".format(prediction) if prediction == "Software Engineer / Programmer" or prediction == "Academician" or prediction == "Technical Support Specialist" else "Sad to say your first job is not related to IT/CS.") 
+    return render_template("predictIT.html", prediction_text = "You will land your 1st job as members of the {}".format(prediction) if prediction == "Software Engineer / Programmer" or prediction == "Academician" or prediction == "Technical Support Specialist" else "Sad to say your first job is not related to IT/CS. \nBased on the system recommendation these are the top 5 courses you will need to focus to land IT Related Job. ") 
 
 @flask_app.route("/predict_CS", methods = ["POST"])
 def predict_CS():
