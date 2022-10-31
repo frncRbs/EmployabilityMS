@@ -112,14 +112,15 @@ X_CS = X_CS.replace(np.nan, 0)
 percent = "%"
 # Create flask app
 flask_app = Flask(__name__)
-model_IT = pickle.load(open("ProjectModel_IT.pkl", "rb"))
-model_CS = pickle.load(open("ProjectModel_CS.pkl", "rb"))
-model_CS_1 = pickle.load(open("ProjectModel_CS_1.pkl", "rb"))
-model_IT_1 = pickle.load(open("ProjectModel_IT_1.pkl", "rb"))
-model_IT_2 = pickle.load(open("ProjectModel_IT_2.pkl", "rb"))
-model_CS_2 = pickle.load(open("ProjectModel_CS_2.pkl", "rb"))
-model_IT_3 = pickle.load(open("ProjectModel_IT_3.pkl", "rb"))
-model_CS_3 = pickle.load(open("ProjectModel_CS_3.pkl", "rb"))
+model_IT = pickle.load(open("model/ProjectModel_IT.pkl", "rb"))
+model_CS = pickle.load(open("model/ProjectModel_CS.pkl", "rb"))
+model_CS_1 = pickle.load(open("model/ProjectModel_CS_1.pkl", "rb"))
+model_IT_1 = pickle.load(open("model/ProjectModel_IT_1.pkl", "rb"))
+model_IT_2 = pickle.load(open("model/ProjectModel_IT_2.pkl", "rb"))
+model_CS_2 = pickle.load(open("model/ProjectModel_CS_2.pkl", "rb"))
+model_IT_3 = pickle.load(open("model/ProjectModel_IT_3.pkl", "rb"))
+model_CS_3 = pickle.load(open("model/ProjectModel_CS_3.pkl", "rb"))
+model_ITsuggest = pickle.load(open("model/IT_SUGGESTEDcourse.pkl", "rb"))
 
 
 @flask_app.route("/")
@@ -145,11 +146,22 @@ def predict_IT():
     prediction1 = model_IT_1.predict(features)
     prediction2 = model_IT_2.predict(features)
     prediction3 = model_IT_3.predict(features)
+    suggestIT = model_ITsuggest.predict(prediction)
+    
     aScore = accuracy_score(new_Ydata_IT, prediction)
     aScore1 = accuracy_score(new_Ydata_IT, prediction1)
     aScore2 = accuracy_score(new_Ydata_IT, prediction2)
     aScore3 = accuracy_score(new_Ydata_IT, prediction3)
-    return render_template("predictIT.html", prediction_text = "" if aScore == 00 else "Your 1st Job is {}{} ".format(prediction, " : {}{}".format(int(aScore), "00%")), prediction_text1 = "" if prediction == prediction1 or prediction1 == prediction2 or prediction1 == prediction3 else "{}{}".format(prediction1, " : {}".format("40%")), prediction_text2 = "" if prediction == prediction2 or prediction2 == prediction or prediction2 == prediction1 or prediction2 == prediction3 else "{}{}".format(prediction2, " : {}".format("60%")), prediction_text3 = "" if prediction == prediction3 or prediction3 == prediction or prediction3 == prediction1 or prediction3 == prediction2 else "{}{}".format(prediction3, " : {}".format("80%")), course_suggestion = "Suggest" if aScore == 00 or prediction1 == "Administrative Assistant" or prediction2 == "Administrative Assistant" or prediction3 == "Administrative Assistant" else "") 
+    return render_template("predictIT.html", prediction_text = "" if aScore == 00 else "Your 1st Job is {}{} ".format(prediction, " : {}{}".format(int(aScore), "00%")), 
+                           prediction_text1 = "" if prediction == prediction1 or prediction1 == prediction2 or prediction1 == prediction3 else 
+                           "{}{}".format(prediction1, " : {}".format("40%")), prediction_text2 = "" if prediction == prediction2 or prediction2 == 
+                           prediction or prediction2 == prediction1 or prediction2 == prediction3 else 
+                           "{}{}".format(prediction2, " : {}".format("60%")), prediction_text3 = "" if 
+                           prediction == prediction3 or prediction3 == prediction or prediction3 == prediction1 or prediction3 == prediction2 else 
+                           "{}{}".format(prediction3, " : {}".format("80%")), course_suggestion = "{}".format(suggestIT.tolist()) if 
+                           aScore == 00 or prediction1 == "Administrative Assistant" or prediction2 == "Administrative Assistant" or 
+                           prediction3 == "Administrative Assistant" else "", showText = "TOP 5 COURSES" if aScore == 00 or prediction1 
+                           == "Administrative Assistant" or prediction2 == "Administrative Assistant" or prediction3 == "Administrative Assistant" else "") 
 
 @flask_app.route("/predict_CS", methods = ["POST"])
 def predict_CS():
