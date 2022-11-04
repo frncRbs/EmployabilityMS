@@ -112,14 +112,17 @@ X_CS = X_CS.replace(np.nan, 0)
 percent = "%"
 # Create flask app
 flask_app = Flask(__name__)
+#MAIN JOB ROLE
 model_IT = pickle.load(open("model/ProjectModel_IT.pkl", "rb"))
 model_CS = pickle.load(open("model/ProjectModel_CS.pkl", "rb"))
+#SECONDARY JOB ROLES
 model_CS_1 = pickle.load(open("model/ProjectModel_CS_1.pkl", "rb"))
 model_IT_1 = pickle.load(open("model/ProjectModel_IT_1.pkl", "rb"))
 model_IT_2 = pickle.load(open("model/ProjectModel_IT_2.pkl", "rb"))
 model_CS_2 = pickle.load(open("model/ProjectModel_CS_2.pkl", "rb"))
 model_IT_3 = pickle.load(open("model/ProjectModel_IT_3.pkl", "rb"))
 model_CS_3 = pickle.load(open("model/ProjectModel_CS_3.pkl", "rb"))
+#TOP 5 COURSES SUGGESTION
 model_ITsuggest = pickle.load(open("model/IT_SUGGESTEDcourse.pkl", "rb"))
 model_CSsuggest = pickle.load(open("model/CS_SUGGESTEDcourse.pkl", "rb"))
 
@@ -148,21 +151,21 @@ def predict_IT():
     prediction2 = model_IT_2.predict(features)
     prediction3 = model_IT_3.predict(features)
     suggestIT = model_ITsuggest.predict(prediction)
-    suggestCS = model_CSsuggest.predict(prediction)
     
     aScore = accuracy_score(new_Ydata_IT, prediction)
     aScore1 = accuracy_score(new_Ydata_IT, prediction1)
     aScore2 = accuracy_score(new_Ydata_IT, prediction2)
     aScore3 = accuracy_score(new_Ydata_IT, prediction3)
     return render_template("predictIT.html", prediction_text = "{}{}".format(prediction, " : {}{}".format(int(aScore), "00%")), 
-                           prediction_text1 = "" if prediction == prediction1 or prediction1 == prediction2 or prediction1 == prediction3 else 
-                           "{}{}".format(prediction1, " : {}{}".format(int(aScore1), "00%")), prediction_text2 = "" if prediction == prediction2 or prediction2 == 
-                           prediction or prediction2 == prediction1 or prediction2 == prediction3 else 
-                           "{}{}".format(prediction2, " : {}{}".format(int(aScore2), "00%")), prediction_text3 = "" if 
-                           prediction == prediction3 or prediction3 == prediction or prediction3 == prediction1 or prediction3 == prediction2 else 
-                           "{}{}".format(prediction3, " : {}{}".format(int(aScore3), "00%")), course_suggestion = "{}".format(suggestIT.tolist()) if 
-                           aScore == 00 or prediction == "Administrative Assistant" else "", showText = "TOP 5 COURSES" if aScore == 00 or 
-                           prediction == "Administrative Assistant" else "", showLowProba = "SECONDARY JOB ROLES", showHiProba = "MAIN JOB ROLE") 
+                           prediction_text1 = "" if prediction == prediction1 or prediction1 == prediction2 or prediction1 == prediction3 else "{}{}".format(prediction1, " : {}{}".format(int(aScore1), "00%")), 
+                           prediction_text2 = "" if prediction == prediction2 or prediction2 == prediction or prediction2 == prediction1 or prediction2 == prediction3 else "{}{}".format(prediction2, " : {}{}".format(int(aScore2), "00%")), 
+                           prediction_text3 = "" if prediction == prediction3 or prediction3 == prediction or prediction3 == prediction1 or prediction3 == prediction2 else "{}{}".format(prediction3, " : {}{}".format(int(aScore3), "00%")), 
+                           course_suggestion = "{}".format(suggestIT.tolist()) if aScore1 == 00 and aScore2 == 00 and aScore3 == 00 or prediction == "Administrative Assistant" else "",
+                           course_suggestion1 = "{}".format(suggestIT.tolist()) if aScore1 != 00 and prediction1 == "Administrative Assistant" or aScore2 != 00 and prediction2 == "Administrative Assistant" or aScore3 != 00 and prediction3 == "Administrative Assistant" else "", 
+                           showText = "~TOP 5 COURSES NEED TO IMPROVE" if aScore1 == 00 and aScore2 == 00 and aScore3 == 00 or prediction == "Administrative Assistant" else "",
+                           showText1 = "TOP 5 COURSES NEED TO IMPROVE~" if aScore1 != 00 and prediction1 == "Administrative Assistant" or aScore2 != 00 and prediction2 == "Administrative Assistant" or aScore3 != 00 and prediction3 == "Administrative Assistant" else "",  
+                           showLowProba = "SECONDARY JOB ROLES", 
+                           showHiProba = "MAIN JOB ROLE") 
 
 @flask_app.route("/predict_CS", methods = ["POST"])
 def predict_CS():
@@ -181,14 +184,15 @@ def predict_CS():
     aScore2 = accuracy_score(new_Ydata_CS, prediction2)
     aScore3 = accuracy_score(new_Ydata_CS, prediction3)
     return render_template("predictCS.html", prediction_text = "{}{}".format(prediction, " : {}{}".format(int(aScore), "00%")), 
-                           prediction_text1 = "" if prediction == prediction1 or prediction1 == prediction2 or prediction1 == prediction3 else 
-                           "{}{}".format(prediction1, " : {}{}".format(int(aScore1), "00%")), prediction_text2 = "" if prediction == prediction2 or prediction2 == 
-                           prediction or prediction2 == prediction1 or prediction2 == prediction3 else 
-                           "{}{}".format(prediction2, " : {}{}".format(int(aScore2), "00%")), prediction_text3 = "" if 
-                           prediction == prediction3 or prediction3 == prediction or prediction3 == prediction1 or prediction3 == prediction2 else 
-                           "{}{}".format(prediction3, " : {}{}".format(int(aScore3), "00%")), course_suggestion = "{}".format(suggestCS.tolist()) if 
-                           aScore == 00 or prediction == "Administrative Assistant" else "", showText = "TOP 5 COURSES" if aScore == 00 or 
-                           prediction == "Administrative Assistant" else "", showLowProba = "SECONDARY JOB ROLES", showHiProba = "MAIN JOB ROLE") 
+                           prediction_text1 = "" if prediction == prediction1 or prediction1 == prediction2 or prediction1 == prediction3 else "{}{}".format(prediction1, " : {}{}".format(int(aScore1), "00%")), 
+                           prediction_text2 = "" if prediction == prediction2 or prediction2 == prediction or prediction2 == prediction1 or prediction2 == prediction3 else "{}{}".format(prediction2, " : {}{}".format(int(aScore2), "00%")), 
+                           prediction_text3 = "" if prediction == prediction3 or prediction3 == prediction or prediction3 == prediction1 or prediction3 == prediction2 else "{}{}".format(prediction3, " : {}{}".format(int(aScore3), "00%")), 
+                           course_suggestion = "{}".format(suggestCS.tolist()) if aScore1 == 00 and aScore2 == 00 and aScore3 == 00 or prediction == "Administrative Assistant" else "",
+                           course_suggestion1 = "{}".format(suggestCS.tolist()) if aScore1 != 00 and prediction1 == "Administrative Assistant" or aScore2 != 00 and prediction2 == "Administrative Assistant" or aScore3 != 00 and prediction3 == "Administrative Assistant" else "", 
+                           showText = "~TOP 5 COURSES NEED TO IMPROVE" if aScore1 == 00 and aScore2 == 00 and aScore3 == 00 or prediction == "Administrative Assistant" else "",
+                           showText1 = "TOP 5 COURSES NEED TO IMPROVE~" if aScore1 != 00 and prediction1 == "Administrative Assistant" or aScore2 != 00 and prediction2 == "Administrative Assistant" or aScore3 != 00 and prediction3 == "Administrative Assistant" else "",  
+                           showLowProba = "SECONDARY JOB ROLES", 
+                           showHiProba = "MAIN JOB ROLE") 
 
 if __name__ == "__main__":
     flask_app.run(debug=True)
