@@ -5,6 +5,9 @@ import pickle
 from pandas import DataFrame
 from flask import Flask, request, jsonify, render_template
 from sklearn.metrics import accuracy_score
+import json
+import plotly
+import plotly.express as px
 
 dataset = pd.read_csv("model/Institute-of-Computer-Studies-Graduate-Tracer-Study-2021-2022-Responses(ALTERED).csv")
 
@@ -101,6 +104,8 @@ CS_FEATURES = [
      'WebProg_2nd'
 ]
 
+
+
 TARGET = 'Suggested_job_role'
 
 Cat_Y = dataset[TARGET]
@@ -110,26 +115,63 @@ X_CS = dataset[CS_FEATURES]
 X_IT = X_IT.replace(np.nan, 0)
 X_CS = X_CS.replace(np.nan, 0)
 percent = "%"
-# Create flask app
+#   CREATE FLASK APP
 flask_app = Flask(__name__)
-#MAIN JOB ROLE
+#   MAIN JOB ROLE
 model_IT = pickle.load(open("model/ProjectModel_IT.pkl", "rb"))
 model_CS = pickle.load(open("model/ProjectModel_CS.pkl", "rb"))
-#SECONDARY JOB ROLES
+#   SECONDARY JOB ROLES
 model_CS_1 = pickle.load(open("model/ProjectModel_CS_1.pkl", "rb"))
 model_IT_1 = pickle.load(open("model/ProjectModel_IT_1.pkl", "rb"))
 model_IT_2 = pickle.load(open("model/ProjectModel_IT_2.pkl", "rb"))
 model_CS_2 = pickle.load(open("model/ProjectModel_CS_2.pkl", "rb"))
 model_IT_3 = pickle.load(open("model/ProjectModel_IT_3.pkl", "rb"))
 model_CS_3 = pickle.load(open("model/ProjectModel_CS_3.pkl", "rb"))
-#TOP 5 COURSES SUGGESTION
+#   TOP 5 COURSES SUGGESTION
 model_ITsuggest = pickle.load(open("model/IT_SUGGESTEDcourse.pkl", "rb"))
 model_CSsuggest = pickle.load(open("model/CS_SUGGESTEDcourse.pkl", "rb"))
 
 
 @flask_app.route("/")
 def Home():
-    return render_template("index.html")
+    # Graph One
+    # df = px.data.medals_wide()
+    # dfTest = pd.read_csv(dfCon)
+    # fig1 = px.bar(df, x="nation", y=["gold", "silver", "bronze"], title="Wide-Form Input")
+    # fig1 = px.histogram(dfTest, y="humidity", title="Wide-Form Input")
+    # graph1JSON = json.dumps(fig1, cls=plotly.utils.PlotlyJSONEncoder)
+    dfCon = "model/Institute-of-Computer-Studies-Graduate-Tracer-Study-2021-2022-Responses(ALTERED).csv"
+    df = pd.read_csv(dfCon)
+    
+    # Graph six
+    fig6 = px.pie(df['Sex'])
+    graph6JSON = json.dumps(fig6, cls=plotly.utils.PlotlyJSONEncoder)
+    
+    # Graph one
+    fig1 = px.bar(df, x="Suggested_job_role", y=["Shiftee", "Units"], title="Respondents from 2018 - 2022")
+    graph1JSON = json.dumps(fig1, cls=plotly.utils.PlotlyJSONEncoder)
+    
+    # Graph two
+    dataIRIS = px.data.iris()
+    fig2 = px.scatter_3d(df, x='Practicum_Industry_Immersion_1st', y='Data_Structures_1st', z='Operating_System_1st',
+              color='Suggested_job_role',  title="Scatter Plot")
+    graph2JSON = json.dumps(fig2, cls=plotly.utils.PlotlyJSONEncoder)
+
+    # Graph three
+    fig3 = px.histogram(df, y="Degree_Completed", title="Respondents from 2018 - 2022")
+    graph3JSON = json.dumps(fig3, cls=plotly.utils.PlotlyJSONEncoder)
+    
+    # Graph four
+    fig4 = px.bar(df, x="Sex", y=["Shiftee", "Units"], title="Wide-Form Input")
+    graph4JSON = json.dumps(fig4, cls=plotly.utils.PlotlyJSONEncoder)
+    
+    # Graph five
+    fig5 = px.bar(df, x="Suggested_job_role", y=["Curriculum", "Degree_Completed"], title="Curriculum and Degree Completed Frequency for Job Role")
+    graph5JSON = json.dumps(fig5, cls=plotly.utils.PlotlyJSONEncoder)
+    
+    
+    
+    return render_template("index.html", graph1JSON=graph1JSON, graph2JSON=graph2JSON, graph3JSON=graph3JSON, graph4JSON=graph4JSON, graph5JSON=graph5JSON, graph6JSON=graph6JSON)
 
 @flask_app.route("/predictCS")
 def CS_view():
@@ -178,6 +220,7 @@ def predict_CS():
     prediction2 = model_CS_2.predict(features)
     prediction3 = model_CS_3.predict(features)
     suggestCS = model_CSsuggest.predict(prediction)
+    #127.0.0.1:5000
     
     aScore = accuracy_score(new_Ydata_CS, prediction)
     aScore1 = accuracy_score(new_Ydata_CS, prediction1)
