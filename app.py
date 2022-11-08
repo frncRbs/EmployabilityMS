@@ -143,35 +143,49 @@ def Home():
     dfCon = "model/Institute-of-Computer-Studies-Graduate-Tracer-Study-2021-2022-Responses(ALTERED).csv"
     df = pd.read_csv(dfCon)
     
-    # Graph six
-    fig6 = px.pie(df['Sex'])
-    graph6JSON = json.dumps(fig6, cls=plotly.utils.PlotlyJSONEncoder)
+    # Graph three
+    fig3 = px.histogram(df, y="Degree_Completed", title="Degree Completed Population of 2018 - 2022")
+    graph3JSON = json.dumps(fig3, cls=plotly.utils.PlotlyJSONEncoder)
     
     # Graph one
-    fig1 = px.bar(df, x="Suggested_job_role", y=["Shiftee", "Units"], title="Respondents from 2018 - 2022")
+    fig1 = px.bar(df, x="Suggested_job_role", y=["Shiftee", "Units"], title="Shiftee and Units Frequency for Job Role")
     graph1JSON = json.dumps(fig1, cls=plotly.utils.PlotlyJSONEncoder)
+    
+    # Graph four
+    fig4 = px.bar(df, x="Sex", y=["Shiftee", "Units"], title="Shiftee and Units Frequency for Sex")
+    graph4JSON = json.dumps(fig4, cls=plotly.utils.PlotlyJSONEncoder)
+    
+    # Graph five
+    fig5 = px.bar(df, x="Suggested_job_role", y=['Digital_Design_1st',
+     'Architecture_and_Organization_1st',
+     'Programming_Languages_1st',
+     'Modelling_and_Simulation_1st',
+     'Information_Assurance_and_Security_1st',
+     'Software_Engineering_1_1st',
+     'Software_Engineering_2_1st',
+     'Network_Management_1st',
+     'Advance_Database_1st',
+     'WebProg_1st'], title="Exclusive Computer Science Courses Frequency for Job Role")
+    graph5JSON = json.dumps(fig5, cls=plotly.utils.PlotlyJSONEncoder)
+    
+    # Graph six
+    fig6 = px.bar(df, x="Suggested_job_role", y=['Integrative_Programming_and_Tech_1st',
+     'System_Integration_and_Architecture_1st',
+     'Information_Assurance_and_Security_1_1st',
+     'Information_Assurance_and_Security_2_1st',
+     'Software_Engineering_1st',
+     'Networking_1_1st',
+     'Networking_2_1st',
+     'WebProg_1st'], title="Exclusive Information Technology Courses Frequency for Job Role")
+    graph6JSON = json.dumps(fig6, cls=plotly.utils.PlotlyJSONEncoder)
     
     # Graph two
     dataIRIS = px.data.iris()
     fig2 = px.scatter_3d(df, x='Practicum_Industry_Immersion_1st', y='Data_Structures_1st', z='Operating_System_1st',
               color='Suggested_job_role',  title="Scatter Plot")
     graph2JSON = json.dumps(fig2, cls=plotly.utils.PlotlyJSONEncoder)
-
-    # Graph three
-    fig3 = px.histogram(df, y="Degree_Completed", title="Respondents from 2018 - 2022")
-    graph3JSON = json.dumps(fig3, cls=plotly.utils.PlotlyJSONEncoder)
     
-    # Graph four
-    fig4 = px.bar(df, x="Sex", y=["Shiftee", "Units"], title="Wide-Form Input")
-    graph4JSON = json.dumps(fig4, cls=plotly.utils.PlotlyJSONEncoder)
-    
-    # Graph five
-    fig5 = px.bar(df, x="Suggested_job_role", y=["Curriculum", "Degree_Completed"], title="Curriculum and Degree Completed Frequency for Job Role")
-    graph5JSON = json.dumps(fig5, cls=plotly.utils.PlotlyJSONEncoder)
-    
-    
-    
-    return render_template("index.html", graph1JSON=graph1JSON, graph2JSON=graph2JSON, graph3JSON=graph3JSON, graph4JSON=graph4JSON, graph5JSON=graph5JSON, graph6JSON=graph6JSON)
+    return render_template("index.html", graph1JSON=graph1JSON, graph2JSON=graph2JSON, graph3JSON=graph3JSON, graph4JSON=graph4JSON, graph5JSON=graph5JSON, graph6JSON=graph6JSON) # 
 
 @flask_app.route("/predictCS")
 def CS_view():
@@ -205,10 +219,10 @@ def predict_IT():
                            course_suggestion = "{}".format(suggestIT.tolist()) if aScore1 == 00 and aScore2 == 00 and aScore3 == 00 or prediction == "Administrative Assistant" else "",
                            course_suggestion1 = "{}".format(suggestIT.tolist()) if aScore1 != 00 and prediction1 == "Administrative Assistant" or aScore2 != 00 and prediction2 == "Administrative Assistant" or aScore3 != 00 and prediction3 == "Administrative Assistant" else "", 
                            showText = "~TOP 5 COURSES NEED TO IMPROVE" if aScore1 == 00 and aScore2 == 00 and aScore3 == 00 or prediction == "Administrative Assistant" else "",
-                           showText1 = "TOP 5 COURSES NEED TO IMPROVE~" if aScore1 != 00 and prediction1 == "Administrative Assistant" or aScore2 != 00 and prediction2 == "Administrative Assistant" or aScore3 != 00 and prediction3 == "Administrative Assistant" else "",  
-                           showLowProba = "SECONDARY JOB ROLES", 
-                           showHiProba = "MAIN JOB ROLE") 
-
+                           showText1 = "TOP 5 COURSES NEED TO IMPROVE~" if aScore1 != 00 and prediction1 == "Administrative Assistant" or aScore2 != 00 and prediction2 == "Administrative Assistant" or aScore3 != 00 and prediction3 == "Administrative Assistant" else ""  
+                        #    showLowProba = "SECONDARY JOB ROLES", 
+                        #    showHiProba = "MAIN JOB ROLE"
+                                                        ) 
 @flask_app.route("/predict_CS", methods = ["POST"])
 def predict_CS():
     float_features = [float(x) for x in request.form.values()]
@@ -233,9 +247,9 @@ def predict_CS():
                            course_suggestion = "{}".format(suggestCS.tolist()) if aScore1 == 00 and aScore2 == 00 and aScore3 == 00 or prediction == "Administrative Assistant" else "",
                            course_suggestion1 = "{}".format(suggestCS.tolist()) if aScore1 != 00 and prediction1 == "Administrative Assistant" or aScore2 != 00 and prediction2 == "Administrative Assistant" or aScore3 != 00 and prediction3 == "Administrative Assistant" else "", 
                            showText = "~TOP 5 COURSES NEED TO IMPROVE" if aScore1 == 00 and aScore2 == 00 and aScore3 == 00 or prediction == "Administrative Assistant" else "",
-                           showText1 = "TOP 5 COURSES NEED TO IMPROVE~" if aScore1 != 00 and prediction1 == "Administrative Assistant" or aScore2 != 00 and prediction2 == "Administrative Assistant" or aScore3 != 00 and prediction3 == "Administrative Assistant" else "",  
-                           showLowProba = "SECONDARY JOB ROLES", 
-                           showHiProba = "MAIN JOB ROLE") 
-
+                           showText1 = "TOP 5 COURSES NEED TO IMPROVE~" if aScore1 != 00 and prediction1 == "Administrative Assistant" or aScore2 != 00 and prediction2 == "Administrative Assistant" or aScore3 != 00 and prediction3 == "Administrative Assistant" else ""  
+                        #    showLowProba = "SECONDARY JOB ROLES", 
+                        #    showHiProba = "MAIN JOB ROLE" 
+                                                                )
 if __name__ == "__main__":
     flask_app.run(debug=True)
