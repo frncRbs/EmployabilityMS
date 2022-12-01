@@ -5,11 +5,16 @@ import pickle
 from pandas import DataFrame
 from flask import Flask, request, jsonify, render_template
 from sklearn.metrics import accuracy_score
+from sklearn.preprocessing import OrdinalEncoder
 import json
 import plotly
 import plotly.express as px
+import scipy
+from scipy.stats import spearmanr
 
 dataset = pd.read_csv("model/Institute-of-Computer-Studies-Graduate-Tracer-Study-2021-2022-Responses(ALTERED).csv")
+
+ordinal_encoder = OrdinalEncoder()
 
 IT_FEATURES = [
      'Sex',
@@ -104,8 +109,6 @@ CS_FEATURES = [
      'WebProg_2nd'
 ]
 
-
-
 TARGET = 'Suggested_job_role'
 
 Cat_Y = dataset[TARGET]
@@ -114,6 +117,9 @@ X_CS = dataset[CS_FEATURES]
 
 X_IT = X_IT.replace(np.nan, 0)
 X_CS = X_CS.replace(np.nan, 0)
+
+X_IT['Sex'] = ordinal_encoder.fit_transform(X_IT[['Sex']])
+X_CS['Sex'] = ordinal_encoder.fit_transform(X_CS[['Sex']])
 percent = "%"
 #   CREATE FLASK APP
 flask_app = Flask(__name__)
@@ -195,61 +201,69 @@ def CS_view():
 def IT_view():
     return render_template("predictIT.html")
 
-
 @flask_app.route("/predict_IT", methods = ["POST"])
+
 def predict_IT():
     float_features = [float(x) for x in request.form.values()]
     features = [np.array(float_features)]
-    new_Xdata_IT = X_IT.sample(1)
+    new_Xdata_IT = X_IT.sample(4)
     new_Ydata_IT = Cat_Y[new_Xdata_IT.index.values]
-    prediction = model_IT.predict(features)
-    prediction1 = model_IT_1.predict(features)
-    prediction2 = model_IT_2.predict(features)
-    prediction3 = model_IT_3.predict(features)
-    suggestIT = model_ITsuggest.predict(prediction)
+    pred_IT = model_IT.predict(features)
+    suggestIT = model_ITsuggest.predict(pred_IT)
+
+    def recall(new_Ydata_IT, pred_IT, K):
+            act_set = set(new_Ydata_IT)
+            pred_set = set(pred_IT[:K])
+            result = round(len(act_set & pred_set) / float(len(act_set)), 2)
+            return result
+
+    actual = new_Ydata_IT
+    prediction = np.array(["Software Engineer / Programmer", "Technical Support Specialist", "Academician", "Administrative Assistant"])
+    np.random.shuffle(prediction)
     
-    aScore = accuracy_score(new_Ydata_IT, prediction)
-    aScore1 = accuracy_score(new_Ydata_IT, prediction1)
-    aScore2 = accuracy_score(new_Ydata_IT, prediction2)
-    aScore3 = accuracy_score(new_Ydata_IT, prediction3)
-    return render_template("predictIT.html", prediction_text = "{}{}".format(prediction, " : {}{}".format(int(aScore), "00%")), 
-                           prediction_text1 = "" if prediction == prediction1 or prediction1 == prediction2 or prediction1 == prediction3 else "{}{}".format(prediction1, " : {}{}".format(int(aScore1), "00%")), 
-                           prediction_text2 = "" if prediction == prediction2 or prediction2 == prediction or prediction2 == prediction1 or prediction2 == prediction3 else "{}{}".format(prediction2, " : {}{}".format(int(aScore2), "00%")), 
-                           prediction_text3 = "" if prediction == prediction3 or prediction3 == prediction or prediction3 == prediction1 or prediction3 == prediction2 else "{}{}".format(prediction3, " : {}{}".format(int(aScore3), "00%")), 
-                           course_suggestion = "{}".format(suggestIT.tolist()) if aScore1 == 00 and aScore2 == 00 and aScore3 == 00 or prediction == "Administrative Assistant" else "",
-                           course_suggestion1 = "{}".format(suggestIT.tolist()) if aScore1 != 00 and prediction1 == "Administrative Assistant" or aScore2 != 00 and prediction2 == "Administrative Assistant" or aScore3 != 00 and prediction3 == "Administrative Assistant" else "", 
-                           showText = "~TOP 5 COURSES NEED TO IMPROVE" if aScore1 == 00 and aScore2 == 00 and aScore3 == 00 or prediction == "Administrative Assistant" else "",
-                           showText1 = "TOP 5 COURSES NEED TO IMPROVE~" if aScore1 != 00 and prediction1 == "Administrative Assistant" or aScore2 != 00 and prediction2 == "Administrative Assistant" or aScore3 != 00 and prediction3 == "Administrative Assistant" else ""  
-                        #    showLowProba = "SECONDARY JOB ROLES", 
-                        #    showHiProba = "MAIN JOB ROLE"
-                                                        ) 
+    for K in range(0, 3):
+        fetch1 = recall(actual, prediction, K)
+        fetch2 = recall(actual, prediction, K-1)
+        fetch3 = recall(actual, prediction, K-2)
+        fetch4 = recall(actual, prediction, K-3)
+        
+        return render_template("predictIT.html", prediction_text1 = "" if fetch1 == 0.0 and fetch2 == 0.0 and fetch3 == 0.0 and fetch4 == 0.0 else "{}".format(f"{prediction[K]} = {recall(actual, prediction, K)}%"), 
+                               prediction_text2 = "" if fetch1 == 0.0 and fetch2 == 0.0 and fetch3 == 0.0 and fetch4 == 0.0 else "{}".format(f"{prediction[K-1]} = {recall(actual, prediction, K-1)}%"),
+                               prediction_text3 = "Not Applicable" if fetch1 == 0.0 and fetch2 == 0.0 and fetch3 == 0.0 and fetch4 == 0.0 else "{}".format(f"{prediction[K-2]} = {recall(actual, prediction, K-2)}%"),
+                               prediction_text4 = "" if fetch1 == 0.0 and fetch2 == 0.0 and fetch3 == 0.0 and fetch4 == 0.0 else "{}".format(f"{prediction[K-3]} = {recall(actual, prediction, K-3)}%"),
+                               course_suggestion = "{}".format(suggestIT.tolist()) if fetch1 == 0.0 and fetch2 == 0.0 and fetch3 == 0.0 and fetch4 == 0.0 else "")
+
 @flask_app.route("/predict_CS", methods = ["POST"])
+
 def predict_CS():
     float_features = [float(x) for x in request.form.values()]
     features = [np.array(float_features)]
-    new_Xdata_CS = X_CS.sample(1)
+    new_Xdata_CS = X_CS.sample(4)
     new_Ydata_CS = Cat_Y[new_Xdata_CS.index.values]
-    prediction = model_CS.predict(features)
-    prediction1 = model_CS_1.predict(features)
-    prediction2 = model_CS_2.predict(features)
-    prediction3 = model_CS_3.predict(features)
-    suggestCS = model_CSsuggest.predict(prediction)
-    #127.0.0.1:5000
+    pred_CS = model_CS.predict(features)
+    suggestCS = model_CSsuggest.predict(pred_CS)
+
+    def recall(new_Ydata_CS, pred_CS, K):
+            act_set = set(new_Ydata_CS)
+            pred_set = set(pred_CS[:K])
+            result = round(len(act_set & pred_set) / float(len(act_set)), 2)
+            return result
+
+    actual = new_Ydata_CS
+    prediction = np.array(["Software Engineer / Programmer", "Technical Support Specialist", "Academician", "Administrative Assistant"])
+    np.random.shuffle(prediction)
     
-    aScore = accuracy_score(new_Ydata_CS, prediction)
-    aScore1 = accuracy_score(new_Ydata_CS, prediction1)
-    aScore2 = accuracy_score(new_Ydata_CS, prediction2)
-    aScore3 = accuracy_score(new_Ydata_CS, prediction3)
-    return render_template("predictCS.html", prediction_text = "{}{}".format(prediction, " : {}{}".format(int(aScore), "00%")), 
-                           prediction_text1 = "" if prediction == prediction1 or prediction1 == prediction2 or prediction1 == prediction3 else "{}{}".format(prediction1, " : {}{}".format(int(aScore1), "00%")), 
-                           prediction_text2 = "" if prediction == prediction2 or prediction2 == prediction or prediction2 == prediction1 or prediction2 == prediction3 else "{}{}".format(prediction2, " : {}{}".format(int(aScore2), "00%")), 
-                           prediction_text3 = "" if prediction == prediction3 or prediction3 == prediction or prediction3 == prediction1 or prediction3 == prediction2 else "{}{}".format(prediction3, " : {}{}".format(int(aScore3), "00%")), 
-                           course_suggestion = "{}".format(suggestCS.tolist()) if aScore1 == 00 and aScore2 == 00 and aScore3 == 00 or prediction == "Administrative Assistant" else "",
-                           course_suggestion1 = "{}".format(suggestCS.tolist()) if aScore1 != 00 and prediction1 == "Administrative Assistant" or aScore2 != 00 and prediction2 == "Administrative Assistant" or aScore3 != 00 and prediction3 == "Administrative Assistant" else "", 
-                           showText = "~TOP 5 COURSES NEED TO IMPROVE" if aScore1 == 00 and aScore2 == 00 and aScore3 == 00 or prediction == "Administrative Assistant" else "",
-                           showText1 = "TOP 5 COURSES NEED TO IMPROVE~" if aScore1 != 00 and prediction1 == "Administrative Assistant" or aScore2 != 00 and prediction2 == "Administrative Assistant" or aScore3 != 00 and prediction3 == "Administrative Assistant" else ""  
-                        #    showLowProba = "SECONDARY JOB ROLES", 
-                        #    showHiProba = "MAIN JOB ROLE" 
-                                                                )
+    for K in range(0, 3):
+        fetch1 = recall(actual, prediction, K)
+        fetch2 = recall(actual, prediction, K-1)
+        fetch3 = recall(actual, prediction, K-2)
+        fetch4 = recall(actual, prediction, K-3)
+        
+        return render_template("predictCS.html", prediction_text1 = "" if fetch1 == 0.0 and fetch2 == 0.0 and fetch3 == 0.0 and fetch4 == 0.0 else "{}".format(f"{prediction[K]} = {recall(actual, prediction, K)}%"), 
+                               prediction_text2 = "" if fetch1 == 0.0 and fetch2 == 0.0 and fetch3 == 0.0 and fetch4 == 0.0 else "{}".format(f"{prediction[K-1]} = {recall(actual, prediction, K-1)}%"),
+                               prediction_text3 = "Not Applicable" if fetch1 == 0.0 and fetch2 == 0.0 and fetch3 == 0.0 and fetch4 == 0.0 else "{}".format(f"{prediction[K-2]} = {recall(actual, prediction, K-2)}%"),
+                               prediction_text4 = "" if fetch1 == 0.0 and fetch2 == 0.0 and fetch3 == 0.0 and fetch4 == 0.0 else "{}".format(f"{prediction[K-3]} = {recall(actual, prediction, K-3)}%"),
+                               course_suggestion = "{}".format(suggestCS.tolist()) if fetch1 == 0.0 and fetch2 == 0.0 and fetch3 == 0.0 and fetch4 == 0.0 else "")
+        
 if __name__ == "__main__":
     flask_app.run(debug=True)
