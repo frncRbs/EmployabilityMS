@@ -9,20 +9,16 @@
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous"> -->
     <!-- <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" /> -->
-    <title>Employability Prediction</title>
+    <title>Information Technology Prediction Result</title>
 </head>
 <body>
-    <div class="grid-2" >
+    <div class="grid-2">
         <div class="section-1">
             <!-- <i class="fas fa-code fa-5x white"></i> -->
             <!-- <img src="https://www.cloudanalogy.co.uk/wp-content/uploads/2019/06/react.png"> -->
-            <img src="https://i.ibb.co/SrRq3zj/300593177-489042066395656-6251703410857689977-n-removebg-preview.png" alt="300593177-489042066395656-6251703410857689977-n-removebg-preview" border="0">
-            <h2 class="labeledTitle">Employability Prediction System</h2>
-            <p>Western Mindanao State University</p>
-            <p>Zamboanga City, Philippines.</p>
-            <a href="#"><i class="fab fa-twitter"></i></a>
-            <a href="#"><i class="fab fa-linkedin"></i></a>
-            <a href="#" ><i class="fab fa-github"></i></a>
+            <img src="https://i.ibb.co/SrRq3zj/300593177-489042066395656-6251703410857689977-n-removebg-preview.png" 
+            alt="300593177-489042066395656-6251703410857689977-n-removebg-preview" border="0" width="400" height="400">
+            <h2 class="labeledTitle">Information Technology Prediction Result</h2>
         </div>
         <div class="section-2">
             <h2>About</h2>
@@ -87,205 +83,6 @@
         </div>
       </div>
      </div>
-
-     <center>
-      <div style="width: 70%; height: auto">
-        <hr>
-          <h1>DATA VISUALIZATION</h1>
-        <hr>
-      </div>
-    </center>
-
-     <center>
-      <main>
-        <div class="row p-4">
-          <!-- <div class="card m-auto" style="width: 90%;" data-aos="fade-left">
-            <div class="card-body">
-                <div id="chart6"></div>
-                    <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                    Quibusdam beatae eos esse hic tempore, itaque dolor quod. Eligendi debitis 
-                    doloremque itaque architecto velit autem suscipit ut laborum optio maxime at 
-                    facere perspiciatis quae molestiae nemo, saepe impedit. Quaerat corporis eius 
-                    libero fugit. Debitis non nobis repudiandae ex soluta vero repellendus omnis eos, 
-                    voluptate mollitia dolorem asperiores sint itaque consequuntur voluptatum totam 
-                    fugit aut nemo maiores! Laboriosam quidem error possimus nobis eligendi dolor aut 
-                    ullam voluptas officiis similique placeat modi, eaque voluptates dolores odit optio, 
-                    pariatur molestias. Eum praesentium totam error aliquam,
-                    tempore in quia exercitationem! Temporibus corporis asperiores esse ipsum?</p>
-                </div>
-            </div>
-        </div> -->
-        <br>
-        <br>
-        <br>
-        <h2>Degree Completed Population of 2018 - 2022</h2>
-        <div class="card mb-4 m-auto" style="width: 90%;" data-aos="slide-up">
-            <div class="card-body">
-                <div id="chart3"></div>
-                    <p class="card-text">~~~</p>
-                </div>
-            </div>
-        </div>
-        <br>
-        <br>
-        <h2>Shiftee and Units Frequency for Job Role</h2>
-          <div class="card m-auto" style="width: 90%;" data-aos="fade-left">
-              <div class="card-body">
-                  <div id="chart1"></div>
-                      <p class="card-text">~~~</p>
-                  </div>
-              </div>
-          </div>
-          <br>
-          <br>
-          <h2>Shiftee and Units Frequency for Sex</h2>
-          <div class="card mb-4 m-auto" style="width: 90%;" data-aos="slide-up">
-                <div class="card-body">
-                    <div id="chart4"></div>
-                        <p class="card-text">~~~</p>
-                    </div>
-                </div>
-            </div>
-          <br>
-          <br>
-          <h2>Exclusive Computer Science Courses</h2>
-            <div class="card mb-4 m-auto" style="width: 90%;" data-aos="slide-up">
-              <div class="card-body">
-                  <div id="chart5"></div>
-                      <p class="card-text">~~~</p>
-                  </div>
-              </div>
-          </div>
-          <br>
-          <br>
-          <h2>Exclusive Information Technology Courses</h2>
-            <div class="card mb-4 m-auto" style="width: 90%;" data-aos="slide-up">
-              <div class="card-body">
-                  <div id="chart6"></div>
-                      <p class="card-text">~~~</p>
-                  </div>
-              </div>
-          </div>
-          <h2>TOP 3 BACK-BREAKING COURSES IN IT-CS</h2>
-          <div class="card mb-4 m-auto" style="width: 90%;" data-aos="fade-left">
-              <div class="card-body">
-                  <div id="chart2"></div>
-                      <p class="card-text">~~~</p>
-                  </div>
-              </div>
-          </div>
-          <br>
-          <br>
-        </div>
-    </main>
-  </center>
-     
-     <!-- plotly CDN -->
-     <script type="text/javascript">
-
-         var graphs2 = {{ graph2JSON | safe}};
-         Plotly.plot("chart2", graphs2,{});
-
-         var graphs3 = {{ graph3JSON | safe}};
-         Plotly.plot("chart3", graphs3,{});
-
-         var graphs1 = {{ graph1JSON | safe}};
-         Plotly.plot("chart1", graphs1,{});
-
-         var graphs5 = {{ graph5JSON | safe}};
-         Plotly.plot("chart5", graphs5,{});
-
-         var graphs6 = {{ graph6JSON | safe}};
-         Plotly.plot("chart6", graphs6,{});
-
-         var graphs4 = {{ graph4JSON | safe}};
-         Plotly.plot("chart4", graphs4,{});
-
-     </script>
-
-<script>
-    class Popup {
-        classPopupShow =  'popup--show';
-        classForBody = 'popup-active';
-        popup = null;
-        closeOnClickOverlay = false;
-    
-        constructor(options = {}) {
-    
-          this.closeOnClickOverlay = options?.closeOnClickOverlay || false;
-         
-          // check if page has vertical scroll
-          this.scrollWidthInit();
-    
-          document.addEventListener('click', e => {
-            
-            // open
-            if (e.target.dataset.popupOpen) {
-              e.preventDefault();
-              this.popup = document.getElementById(e.target.dataset.popupOpen);
-              this.show();
-            }
-    
-            // close
-            if (e.target.hasAttribute('data-popup-close') ||
-               (e.target.closest('.popup__close') && e.target.closest('.popup__close').hasAttribute('data-popup-close')) ||
-               (this.closeOnClickOverlay && e.target.classList.contains('popup__content'))
-            ){
-              e.preventDefault();
-              this.hide();
-            }
-          })
-        }
-    
-        scrollWidthInit() {
-    
-          function existVerticalScroll() {
-            let vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0),
-                sh =  document.body.scrollHeight;
-    
-            return sh > vh ? true : false;
-          }
-    
-          let div = document.createElement('div');
-      
-          div.style.overflowY = 'scroll';
-          div.style.width = '50px';
-          div.style.height = '50px';
-      
-          document.body.append(div);
-      
-          let scrollWidth = div.offsetWidth - div.clientWidth;
-      
-          div.remove();
-    
-          if (existVerticalScroll()) {
-            document.documentElement.style.setProperty('--scroll-width', scrollWidth + 'px');
-          }
-        }
-    
-        show() {
-          
-          if (this.popup) {
-            this.popup.classList.add(this.classPopupShow);
-          }
-    
-          document.body.classList.add(this.classForBody);
-        }
-    
-        hide() {
-    
-          if (this.popup) {
-            this.popup.classList.remove(this.classPopupShow);
-          }
-    
-          document.body.classList.remove(this.classForBody);
-        }
-      }
-    
-      new Popup({
-        closeOnClickOverlay: true, // if you want popup to be closed after click on overlay (default: false)
-      });
-</script>
 </body>
 </html>
 
@@ -294,10 +91,6 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 
 .grid-2{
-    background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('https://i.ytimg.com/vi/jh7ejR4v2Gw/maxresdefault.jpg');
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
     padding: 0;
     margin: 0;
     display: grid;
@@ -309,7 +102,7 @@ body{
     padding: 0;
     font-family: 'Roboto', sans-serif;
     background-color: #101214;
-    color: #c2c8cf;
+    color: #7A7C80;
 }
 
 h2,.white{
@@ -317,7 +110,7 @@ h2,.white{
 }
 
 a{
-    color: #c2c8cf;
+    color: #7A7C80;
     text-decoration: none;
 }
 /* section 1 */
