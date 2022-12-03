@@ -1,16 +1,17 @@
-from tkinter import Y
 import numpy as np
 import pandas as pd
 import pickle
+from tkinter import Y
 from pandas import DataFrame
 from flask import Flask, request, jsonify, render_template
 from sklearn.metrics import accuracy_score
 from sklearn.preprocessing import OrdinalEncoder
+from scipy.stats import spearmanr
 import json
 import plotly
 import plotly.express as px
-import scipy
-from scipy.stats import spearmanr
+import random
+
 
 dataset = pd.read_csv("model/Institute-of-Computer-Studies-Graduate-Tracer-Study-2021-2022-Responses(ALTERED).csv")
 
@@ -214,22 +215,35 @@ def predict_IT():
             pred_set = set(pred_IT[:K])
             result = round(len(act_set & pred_set) / float(len(act_set)), 2)
             return result
-
-    actual = new_Ydata_IT
-    prediction = np.array(["Software Engineer / Programmer", "Technical Support Specialist", "Academician", "Administrative Assistant"])
-    np.random.shuffle(prediction)
     
-    for K in range(0, 3):
+    for K in range(0, 4):
+        
+        predIT = pred_IT[0]
+        actual = new_Ydata_IT
+        prediction = ["Software Engineer / Programmer", "Technical Support Specialist", "Academician", "Administrative Assistant"]
+        random.shuffle(prediction)
+        prediction = [prediction.replace(predIT, '0')for prediction in prediction]
+        prediction.append(predIT)
+        
         fetch1 = recall(actual, prediction, K)
         fetch2 = recall(actual, prediction, K-1)
         fetch3 = recall(actual, prediction, K-2)
         fetch4 = recall(actual, prediction, K-3)
         
-        return render_template("predictIT.html", prediction_text1 = "" if fetch1 == 0.0 and fetch2 == 0.0 and fetch3 == 0.0 and fetch4 == 0.0 else "{}".format(f"{prediction[K]} = {recall(actual, prediction, K)}%"), 
-                               prediction_text2 = "" if fetch1 == 0.0 and fetch2 == 0.0 and fetch3 == 0.0 and fetch4 == 0.0 else "{}".format(f"{prediction[K-1]} = {recall(actual, prediction, K-1)}%"),
-                               prediction_text3 = "Not Applicable" if fetch1 == 0.0 and fetch2 == 0.0 and fetch3 == 0.0 and fetch4 == 0.0 else "{}".format(f"{prediction[K-2]} = {recall(actual, prediction, K-2)}%"),
-                               prediction_text4 = "" if fetch1 == 0.0 and fetch2 == 0.0 and fetch3 == 0.0 and fetch4 == 0.0 else "{}".format(f"{prediction[K-3]} = {recall(actual, prediction, K-3)}%"),
-                               course_suggestion = "{}".format(suggestIT.tolist()) if fetch1 == 0.0 and fetch2 == 0.0 and fetch3 == 0.0 and fetch4 == 0.0 else "")
+        fetchPred1 = prediction[0]
+        fetchPred2 = prediction[-1]
+        fetchPred3 = prediction[-2]
+        fetchPred4 = prediction[-3]
+        
+        return render_template("predictIT.html", 
+                               prediction_text1 = "" if fetch1 == 0.0 or fetch1 == 0.0 and fetch2 == 0.0 and fetch3 == 0.0 and fetch4 == 0.0 or fetch2 == 1.0 and predIT == "Administrative Assistant" or fetchPred1 == '0' else "{}".format(f"{prediction[K]} = {fetch1}%"), 
+                               prediction_text2 = "" if fetch2 == 0.0 or fetch1 == 0.0 and fetch2 == 0.0 and fetch3 == 0.0 and fetch4 == 0.0 or fetch2 == 1.0 and predIT == "Administrative Assistant" or fetchPred2 == '0' else "{}".format(f"{prediction[K-1]} = {fetch2}%"),
+                               prediction_text3 = "" if fetch3 == 0.0 or fetch1 == 0.0 and fetch2 == 0.0 and fetch3 == 0.0 and fetch4 == 0.0 or fetch2 == 1.0 and predIT == "Administrative Assistant" or fetchPred3 == '0' else "{}".format(f"{prediction[K-2]} = {fetch3}%"),
+                               prediction_text4 = "" if fetch4 == 0.0 or fetch1 == 0.0 and fetch2 == 0.0 and fetch3 == 0.0 and fetch4 == 0.0 or fetch2 == 1.0 and predIT == "Administrative Assistant" or fetchPred4 == '0' else "{}".format(f"{prediction[K-3]} = {fetch4}%"),
+                               label_text1 = "NOT APPLICABLE. Below are the courses must improve to increase the chances on landing IT/CS Related Job~~" if fetch1 == 0.0 and fetch2 == 0.0 and fetch3 == 0.0 and fetch4 == 0.0 else "",
+                               label_text2 = "NOT APPLICABLE. ~~Below are the courses must improve to increase the chances on landing IT/CS Related Job" if fetch2 == 1.0 and predIT == "Administrative Assistant" else "",
+                               course_suggestion1 = "{}".format(suggestIT.tolist()) if fetch1 == 0.0 and fetch2 == 0.0 and fetch3 == 0.0 and fetch4 == 0.0 else "",
+                               course_suggestion2 = "{}".format(suggestIT.tolist()) if fetch2 == 1.0 and predIT == "Administrative Assistant" else "")
 
 @flask_app.route("/predict_CS", methods = ["POST"])
 def predict_CS():
@@ -251,6 +265,7 @@ def predict_CS():
         predCS = pred_CS[0]
         actual = new_Ydata_CS
         prediction = ["Software Engineer / Programmer", "Technical Support Specialist", "Academician", "Administrative Assistant"]
+        random.shuffle(prediction)
         prediction = [prediction.replace(predCS, '0')for prediction in prediction]
         prediction.append(predCS)
         
