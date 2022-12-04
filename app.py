@@ -12,7 +12,6 @@ import plotly
 import plotly.express as px
 import random
 
-
 dataset = pd.read_csv("model/Institute-of-Computer-Studies-Graduate-Tracer-Study-2021-2022-Responses(ALTERED).csv")
 
 ordinal_encoder = OrdinalEncoder()
@@ -216,8 +215,7 @@ def predict_IT():
             result = round(len(act_set & pred_set) / float(len(act_set)), 2)
             return result
     
-    for K in range(0, 4):
-        
+    for K in range(0, 3):
         predIT = pred_IT[0]
         actual = new_Ydata_IT
         prediction = ["Software Engineer / Programmer", "Technical Support Specialist", "Academician", "Administrative Assistant"]
@@ -235,7 +233,7 @@ def predict_IT():
         fetchPred3 = prediction[-2]
         fetchPred4 = prediction[-3]
         
-        return render_template("predictIT.html", 
+        return render_template("ITend.html", 
                                prediction_text1 = "" if fetch1 == 0.0 or fetch1 == 0.0 and fetch2 == 0.0 and fetch3 == 0.0 and fetch4 == 0.0 or fetch2 == 1.0 and predIT == "Administrative Assistant" or fetchPred1 == '0' else "{}".format(f"{prediction[K]} = {fetch1}%"), 
                                prediction_text2 = "" if fetch2 == 0.0 or fetch1 == 0.0 and fetch2 == 0.0 and fetch3 == 0.0 and fetch4 == 0.0 or fetch2 == 1.0 and predIT == "Administrative Assistant" or fetchPred2 == '0' else "{}".format(f"{prediction[K-1]} = {fetch2}%"),
                                prediction_text3 = "" if fetch3 == 0.0 or fetch1 == 0.0 and fetch2 == 0.0 and fetch3 == 0.0 and fetch4 == 0.0 or fetch2 == 1.0 and predIT == "Administrative Assistant" or fetchPred3 == '0' else "{}".format(f"{prediction[K-2]} = {fetch3}%"),
@@ -260,7 +258,7 @@ def predict_CS():
             result = round(len(act_set & pred_set) / float(len(act_set)), 2)
             return result
         
-    for K in range(0, 4):
+    for K in range(0, 3):
         
         predCS = pred_CS[0]
         actual = new_Ydata_CS
@@ -284,8 +282,8 @@ def predict_CS():
                                prediction_text2 = "" if fetch2 == 0.0 or fetch1 == 0.0 and fetch2 == 0.0 and fetch3 == 0.0 and fetch4 == 0.0 or fetch2 == 1.0 and predCS == "Administrative Assistant" or fetchPred2 == '0' else "{}".format(f"{prediction[K-1]} = {fetch2}%"),
                                prediction_text3 = "" if fetch3 == 0.0 or fetch1 == 0.0 and fetch2 == 0.0 and fetch3 == 0.0 and fetch4 == 0.0 or fetch2 == 1.0 and predCS == "Administrative Assistant" or fetchPred3 == '0' else "{}".format(f"{prediction[K-2]} = {fetch3}%"),
                                prediction_text4 = "" if fetch4 == 0.0 or fetch1 == 0.0 and fetch2 == 0.0 and fetch3 == 0.0 and fetch4 == 0.0 or fetch2 == 1.0 and predCS == "Administrative Assistant" or fetchPred4 == '0' else "{}".format(f"{prediction[K-3]} = {fetch4}%"),
-                               label_text1 = "NOT APPLICABLE. Below are the courses must improve to increase the chances on landing IT/CS Related Job1" if fetch1 == 0.0 and fetch2 == 0.0 and fetch3 == 0.0 and fetch4 == 0.0 else "",
-                               label_text2 = "NOT APPLICABLE. Below are the courses must improve to increase the chances on landing IT/CS Related Job2" if fetch2 == 1.0 and predCS == "Administrative Assistant" else "",
+                               label_text1 = "NOT APPLICABLE. Below are the courses must improve to increase the chances on landing IT/CS Related Job~~" if fetch1 == 0.0 and fetch2 == 0.0 and fetch3 == 0.0 and fetch4 == 0.0 else "",
+                               label_text2 = "NOT APPLICABLE. ~~Below are the courses must improve to increase the chances on landing IT/CS Related Job" if fetch2 == 1.0 and predCS == "Administrative Assistant" else "",
                                course_suggestion1 = "{}".format(suggestCS.tolist()) if fetch1 == 0.0 and fetch2 == 0.0 and fetch3 == 0.0 and fetch4 == 0.0 else "",
                                course_suggestion2 = "{}".format(suggestCS.tolist()) if fetch2 == 1.0 and predCS == "Administrative Assistant" else "")
         

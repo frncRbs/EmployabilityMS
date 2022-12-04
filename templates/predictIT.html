@@ -10,11 +10,17 @@
 <body>
     
   <form action="{{ url_for('predict_IT')}}"method="post">
+
+    <div class="header">
+      <div class="logo">
+        <h2>Welcome <div style="color: green; display: inline">Information Technology</div> Student</h2>
+      </div>
+    </div>
+
     <div class="grid-2">
         <br>
-        <center><h2>Welcome <div style="color: green; display: inline">Information Technology</div> Student</h2></center>
-        <center><i><p>Note: If Incomplete select INC or else if Dropped select DRP respectively</p></i></center>
-        <center><i><p>INC = (0 / No Grade) and DRP = 5</p></i></center>
+        <!-- <center><i><p>Note: If Incomplete select INC or else if Dropped select DRP respectively</p></i></center>
+        <center><i><p>INC = (0 / No Grade) and DRP = 5</p></i></center> -->
         <label for="username" style="position:relative; right:150px; color: white">
           Basic Information :</label>
         <!-- <label class="custom-field two">
@@ -29,7 +35,7 @@
             </select>
             <span class="placeholder" style="color:#7A7C80">Sex</span>
         </label>
-        <label class="custom-field two">
+        <label class="custom-field two" style="margin-bottom: 20px;">
             <select type="text" name="Shiftee" id="drop-down" placeholder="">
               <option value="">Select</option>
               <option value="1">Shiftee / Transferee</option>
@@ -38,7 +44,7 @@
             <span class="placeholder" style="color:#7A7C80">Shiftee / Transferee or Freshmen</span>
         </label>
         <div>
-          <hr>
+          <!-- <hr>
           <hr>
             <center><h3 style="color: grey" id="pred2"><i><b style="color: green">{{ prediction_text2 }}</b></i></h3></center>
             <center><h3 style="color: grey" id="pred3"><i><b style="color: green">{{ prediction_text3 }}</b></i></h3></center>
@@ -49,14 +55,14 @@
           <hr>
             <center><h3 style="color: grey"><i><b style="color: green">{{ course_suggestion1 }}</b></i></h3></center>
             <center><h3 style="color: grey"><i><b style="color: green">{{ course_suggestion2 }}</b></i></h3></center>
-          <hr>
+          <hr> -->
         </div>
         <div class="grid-con">
-            <label for="username" style="color: white; margin-top: 20px">
+            <label for="username" style="color: white; margin-top: 20px; font-weight: bold; font-size: large">
               Information Technology Courses:</label>
               <div class="child-grid1">
                   <label class="custom-field two">
-                      <select type="text" style="width: 215px;" name="ComProg_1_1st" id="drop-down" placeholder="">
+                      <select type="text" style="width: 250px;" name="ComProg_1_1st" id="drop-down" placeholder="">
                         <option value="0">Select Grade</option>
                         <option value="0">INC</option>
                         <option value="5">DRP</option>
@@ -70,10 +76,10 @@
                         <option value="2.75">2.75</option>
                         <option value="3">3</option>
                       </select>
-                      <span class="placeholder" style="padding-bottom: 27px; color:#7A7C80; z-index: -1">Computer Programming 1</span>
+                      <span class="placeholder" style="padding-bottom: 27px; color: white; z-index: -1; font-style: italic">Computer Programming 1</span>
                   </label>
                   <label class="custom-field two">
-                      <select type="text" name="ComProg_1_2nd" style="width: 80px; margin-right: 20px" id="drop-down" placeholder="">
+                      <select type="text" name="ComProg_1_2nd" style="width: 80px; margin-right: 40px" id="drop-down" placeholder="">
                         <option value="0">Select</option>
                         <option value="0">INC</option>
                         <option value="5">DRP</option>
@@ -87,10 +93,10 @@
                         <option value="2.75">2.75</option>
                         <option value="3">3</option>
                       </select>
-                      <span class="placeholder" style="padding-bottom: 27px; color:#7A7C80; z-index: -1">2nd Try</span>
+                      <span class="placeholder" style="padding-bottom: 27px; color: white; z-index: -1; font-style: italic">2nd Try</span>
                   </label>
                   <label class="custom-field two">
-                    <select type="text" style="width: 215px;" name="ComProg_2_1st" id="drop-down" placeholder="">
+                    <select type="text" style="width: 250px;" name="ComProg_2_1st" id="drop-down" placeholder="">
                       <option value="0">Select Grade</option>
                       <option value="0">INC</option>
                       <option value="5">DRP</option>
@@ -104,7 +110,7 @@
                       <option value="2.75">2.75</option>
                       <option value="3">3</option>
                     </select>
-                    <span class="placeholder" style="padding-bottom: 27px; color:#7A7C80; z-index: -1">Computer Programming 2</span>
+                    <span class="placeholder" style="padding-bottom: 27px; color: white; z-index: -1; font-style: italic">Computer Programming 2</span>
                 </label>
                 <label class="custom-field two">
                     <select type="text" name="ComProg_2_2nd" style="width: 80px;" id="drop-down" placeholder="">
@@ -121,13 +127,13 @@
                       <option value="2.75">2.75</option>
                       <option value="3">3</option>
                     </select>
-                    <span class="placeholder" style="padding-bottom: 27px; color:#7A7C80; z-index: -1">2nd Try</span>
+                    <span class="placeholder" style="padding-bottom: 27px; color: white; z-index: -1; font-style: italic">2nd Try</span>
                 </label>
               </div>
             
               <div class="child-grid2">
                     <label class="custom-field two">
-                      <select type="text" style="width: 215px;" name="Intro_to_Computing_1st" id="drop-down" placeholder="">
+                      <select type="text" style="width: 250px;" name="Intro_to_Computing_1st" id="drop-down" placeholder="">
                         <option value="0">Select grade</option>
                         <option value="0">INC</option>
                         <option value="5">DRP</option>
@@ -141,10 +147,10 @@
                         <option value="2.75">2.75</option>
                         <option value="3">3</option>
                       </select>
-                      <span class="placeholder" style="padding-bottom: 27px; color:#7A7C80; z-index: -1">Intro to Computing</span>
+                      <span class="placeholder" style="padding-bottom: 27px; color: white; z-index: -1; font-style: italic">Intro to Computing</span>
                   </label>
                   <label class="custom-field two">
-                      <select type="text" name="Intro_to_Computing_2nd" style="width: 80px; margin-right: 20px" id="drop-down" placeholder="">
+                      <select type="text" name="Intro_to_Computing_2nd" style="width: 80px; margin-right: 40px" id="drop-down" placeholder="">
                         <option value="0">Select</option>
                         <option value="0">INC</option>
                         <option value="5">DRP</option>
@@ -158,10 +164,10 @@
                         <option value="2.75">2.75</option>
                         <option value="3">3</option>
                       </select>
-                      <span class="placeholder" style="padding-bottom: 27px; color:#7A7C80; z-index: -1">2nd Try</span>
+                      <span class="placeholder" style="padding-bottom: 27px; color: white; z-index: -1; font-style: italic">2nd Try</span>
                   </label>
                   <label class="custom-field two">
-                    <select type="text" style="width: 215px;" name="Info_Management_1st" id="drop-down" placeholder="">
+                    <select type="text" style="width: 250px;" name="Info_Management_1st" id="drop-down" placeholder="">
                       <option value="0">Select grade</option>
                       <option value="0">INC</option>
                       <option value="5">DRP</option>
@@ -175,7 +181,7 @@
                       <option value="2.75">2.75</option>
                       <option value="3">3</option>
                     </select>
-                    <span class="placeholder" style="padding-bottom: 27px; color:#7A7C80; z-index: -1">Info Management</span>
+                    <span class="placeholder" style="padding-bottom: 27px; color: white; z-index: -1; font-style: italic">Info Management</span>
                 </label>
                 <label class="custom-field two">
                     <select type="text" name="Info_Management_2nd" style="width: 80px;" id="drop-down" placeholder="">
@@ -192,13 +198,13 @@
                       <option value="2.75">2.75</option>
                       <option value="3">3</option>
                     </select>
-                    <span class="placeholder" style="padding-bottom: 27px; color:#7A7C80; z-index: -1">2nd Try</span>
+                    <span class="placeholder" style="padding-bottom: 27px; color: white; z-index: -1; font-style: italic">2nd Try</span>
                 </label>
               </div>
 
               <div class="child-grid1">
                 <label class="custom-field two">
-                    <select type="text" style="width: 215px;" name="Operating_System_1st" id="drop-down" placeholder="">
+                    <select type="text" style="width: 250px;" name="Operating_System_1st" id="drop-down" placeholder="">
                       <option value="0">Select Grade</option>
                       <option value="0">INC</option>
                       <option value="5">DRP</option>
@@ -212,10 +218,10 @@
                       <option value="2.75">2.75</option>
                       <option value="3">3</option>
                     </select>
-                    <span class="placeholder" style="padding-bottom: 27px; color:#7A7C80; z-index: -1">Operating System</span>
+                    <span class="placeholder" style="padding-bottom: 27px; color: white; z-index: -1; font-style: italic">Operating System</span>
                 </label>
                 <label class="custom-field two">
-                    <select type="text" name="Operating_System_2nd" style="width: 80px; margin-right: 20px" id="drop-down" placeholder="">
+                    <select type="text" name="Operating_System_2nd" style="width: 80px; margin-right: 40px" id="drop-down" placeholder="">
                       <option value="0">Select</option>
                       <option value="0">INC</option>
                       <option value="5">DRP</option>
@@ -229,10 +235,10 @@
                       <option value="2.75">2.75</option>
                       <option value="3">3</option>
                     </select>
-                    <span class="placeholder" style="padding-bottom: 27px; color:#7A7C80; z-index: -1">2nd Try</span>
+                    <span class="placeholder" style="padding-bottom: 27px; color: white; z-index: -1; font-style: italic">2nd Try</span>
                 </label>
                 <label class="custom-field two">
-                  <select type="text" style="width: 215px;" name="Elective_1_1st" id="drop-down" placeholder="">
+                  <select type="text" style="width: 250px;" name="Elective_1_1st" id="drop-down" placeholder="">
                     <option value="0">Select Grade</option>
                     <option value="0">INC</option>
                     <option value="5">DRP</option>
@@ -246,7 +252,7 @@
                     <option value="2.75">2.75</option>
                     <option value="3">3</option>
                   </select>
-                  <span class="placeholder" style="padding-bottom: 27px; color:#7A7C80; z-index: -1">Elective 1</span>
+                  <span class="placeholder" style="padding-bottom: 27px; color: white; z-index: -1; font-style: italic">Elective 1</span>
               </label>
               <label class="custom-field two">
                   <select type="text" name="Elective_1_2nd" style="width: 80px;" id="drop-down" placeholder="">
@@ -263,12 +269,12 @@
                     <option value="2.75">2.75</option>
                     <option value="3">3</option>
                   </select>
-                  <span class="placeholder" style="padding-bottom: 27px; color:#7A7C80; z-index: -1">2nd Try</span>
+                  <span class="placeholder" style="padding-bottom: 27px; color: white; z-index: -1; font-style: italic">2nd Try</span>
               </label>
             </div>
             <div class="child-grid1">
               <label class="custom-field two">
-                  <select type="text" style="width: 215px;" name="Elective_2_1st" id="drop-down" placeholder="">
+                  <select type="text" style="width: 250px;" name="Elective_2_1st" id="drop-down" placeholder="">
                     <option value="0">Select Grade</option>
                     <option value="0">INC</option>
                     <option value="5">DRP</option>
@@ -282,10 +288,10 @@
                     <option value="2.75">2.75</option>
                     <option value="3">3</option>
                   </select>
-                  <span class="placeholder" style="padding-bottom: 27px; color:#7A7C80; z-index: -1">Elective 2</span>
+                  <span class="placeholder" style="padding-bottom: 27px; color: white; z-index: -1; font-style: italic">Elective 2</span>
               </label>
               <label class="custom-field two">
-                  <select type="text" name="Elective_2_2nd" style="width: 80px; margin-right: 20px" id="drop-down" placeholder="">
+                  <select type="text" name="Elective_2_2nd" style="width: 80px; margin-right: 40px" id="drop-down" placeholder="">
                     <option value="0">Select</option>
                     <option value="0">INC</option>
                     <option value="5">DRP</option>
@@ -299,10 +305,10 @@
                     <option value="2.75">2.75</option>
                     <option value="3">3</option>
                   </select>
-                  <span class="placeholder" style="padding-bottom: 27px; color:#7A7C80; z-index: -1">2nd Try</span>
+                  <span class="placeholder" style="padding-bottom: 27px; color: white; z-index: -1; font-style: italic">2nd Try</span>
               </label>
               <label class="custom-field two">
-                <select type="text" style="width: 215px;" name="Elective_3_1st" id="drop-down" placeholder="">
+                <select type="text" style="width: 250px;" name="Elective_3_1st" id="drop-down" placeholder="">
                   <option value="0">Select Grade</option>
                   <option value="0">INC</option>
                   <option value="5">DRP</option>
@@ -316,7 +322,7 @@
                   <option value="2.75">2.75</option>
                   <option value="3">3</option>
                 </select>
-                <span class="placeholder" style="padding-bottom: 27px; color:#7A7C80; z-index: -1">Elective 3</span>
+                <span class="placeholder" style="padding-bottom: 27px; color: white; z-index: -1; font-style: italic">Elective 3</span>
             </label>
             <label class="custom-field two">
                 <select type="text" name="Elective_3_2nd" style="width: 80px;" id="drop-down" placeholder="">
@@ -333,13 +339,13 @@
                   <option value="2.75">2.75</option>
                   <option value="3">3</option>
                 </select>
-                <span class="placeholder" style="padding-bottom: 27px; color:#7A7C80; z-index: -1">2nd Try</span>
+                <span class="placeholder" style="padding-bottom: 27px; color: white; z-index: -1; font-style: italic">2nd Try</span>
             </label>
           </div>
        
             <div class="child-grid2">
                   <label class="custom-field two">
-                    <select type="text" style="width: 215px;" name="Data_Structures_1st" id="drop-down" placeholder="">
+                    <select type="text" style="width: 250px;" name="Data_Structures_1st" id="drop-down" placeholder="">
                       <option value="0">Select grade</option>
                       <option value="0">INC</option>
                       <option value="5">DRP</option>
@@ -353,10 +359,10 @@
                       <option value="2.75">2.75</option>
                       <option value="3">3</option>
                     </select>
-                    <span class="placeholder" style="padding-bottom: 27px; color:#7A7C80; z-index: -1">Data Structures</span>
+                    <span class="placeholder" style="padding-bottom: 27px; color: white; z-index: -1; font-style: italic">Data Structures</span>
                 </label>
                 <label class="custom-field two">
-                    <select type="text" name="Data_Structures_2nd" style="width: 80px; margin-right: 20px" id="drop-down" placeholder="">
+                    <select type="text" name="Data_Structures_2nd" style="width: 80px; margin-right: 40px" id="drop-down" placeholder="">
                       <option value="0">Select</option>
                       <option value="0">INC</option>
                       <option value="5">DRP</option>
@@ -370,10 +376,10 @@
                       <option value="2.75">2.75</option>
                       <option value="3">3</option>
                     </select>
-                    <span class="placeholder" style="padding-bottom: 27px; color:#7A7C80; z-index: -1">2nd Try</span>
+                    <span class="placeholder" style="padding-bottom: 27px; color: white; z-index: -1; font-style: italic">2nd Try</span>
                 </label>
                 <label class="custom-field two">
-                  <select type="text" style="width: 215px;" name="Application_Dev_and_Emerging_Tech_1st" id="drop-down" placeholder="">
+                  <select type="text" style="width: 250px;" name="Application_Dev_and_Emerging_Tech_1st" id="drop-down" placeholder="">
                     <option value="0">Select grade</option>
                     <option value="0">INC</option>
                     <option value="5">DRP</option>
@@ -387,7 +393,7 @@
                     <option value="2.75">2.75</option>
                     <option value="3">3</option>
                   </select>
-                  <span class="placeholder" style="padding-bottom: 27px; color:#7A7C80; z-index: -1">Application Dev and Emerging Tech</span>
+                  <span class="placeholder" style="padding-bottom: 27px; color: white; z-index: -1; font-style: italic">Application Dev and Emerging Tech</span>
               </label>
               <label class="custom-field two">
                   <select type="text" name="Application_Dev_and_Emerging_Tech_2nd" style="width: 80px;" id="drop-down" placeholder="">
@@ -404,13 +410,13 @@
                     <option value="2.75">2.75</option>
                     <option value="3">3</option>
                   </select>
-                  <span class="placeholder" style="padding-bottom: 27px; color:#7A7C80; z-index: -1">2nd Try</span>
+                  <span class="placeholder" style="padding-bottom: 27px; color: white; z-index: -1; font-style: italic">2nd Try</span>
               </label>
             </div>
 
             <div class="child-grid1">
               <label class="custom-field two">
-                  <select type="text" style="width: 215px;" name="Human_and_Computer_Integration_1st" id="drop-down" placeholder="">
+                  <select type="text" style="width: 250px;" name="Human_and_Computer_Integration_1st" id="drop-down" placeholder="">
                     <option value="0">Select Grade</option>
                     <option value="0">INC</option>
                     <option value="5">DRP</option>
@@ -424,10 +430,10 @@
                     <option value="2.75">2.75</option>
                     <option value="3">3</option>
                   </select>
-                  <span class="placeholder" style="padding-bottom: 27px; color:#7A7C80; z-index: -1">Human and Computer Integration</span>
+                  <span class="placeholder" style="padding-bottom: 27px; color: white; z-index: -1; font-style: italic">Human and Computer Integration</span>
               </label>
               <label class="custom-field two">
-                  <select type="text" name="Human_and_Computer_Integration_2nd" style="width: 80px; margin-right: 20px" id="drop-down" placeholder="">
+                  <select type="text" name="Human_and_Computer_Integration_2nd" style="width: 80px; margin-right: 40px" id="drop-down" placeholder="">
                     <option value="0">Select</option>
                     <option value="0">INC</option>
                     <option value="5">DRP</option>
@@ -441,10 +447,10 @@
                     <option value="2.75">2.75</option>
                     <option value="3">3</option>
                   </select>
-                  <span class="placeholder" style="padding-bottom: 27px; color:#7A7C80; z-index: -1">2nd Try</span>
+                  <span class="placeholder" style="padding-bottom: 27px; color: white; z-index: -1; font-style: italic">2nd Try</span>
               </label>
               <label class="custom-field two">
-                <select type="text" style="width: 215px;" name="Practicum_Industry_Immersion_1st" id="drop-down" placeholder="">
+                <select type="text" style="width: 250px;" name="Practicum_Industry_Immersion_1st" id="drop-down" placeholder="">
                   <option value="0">Select Grade</option>
                   <option value="0">INC</option>
                   <option value="5">DRP</option>
@@ -458,7 +464,7 @@
                   <option value="2.75">2.75</option>
                   <option value="3">3</option>
                 </select>
-                <span class="placeholder" style="padding-bottom: 27px; color:#7A7C80; z-index: -1">Practicum Industry Immersion</span>
+                <span class="placeholder" style="padding-bottom: 27px; color: white; z-index: -1; font-style: italic">Practicum Industry Immersion</span>
             </label>
             <label class="custom-field two">
                 <select type="text" name="Practicum_Industry_Immersion_2nd" style="width: 80px;" id="drop-down" placeholder="">
@@ -475,18 +481,18 @@
                   <option value="2.75">2.75</option>
                   <option value="3">3</option>
                 </select>
-                <span class="placeholder" style="padding-bottom: 27px; color:#7A7C80; z-index: -1">2nd Try</span>
+                <span class="placeholder" style="padding-bottom: 27px; color: white; z-index: -1; font-style: italic">2nd Try</span>
             </label>
           </div>
 
           <div>
-            <center><p style="color: white">Exclusive Information Technology Courses</p></center>
+            <center><p style="color: white; margin-top: 20px; font-weight: bold; font-size: large" >Exclusive Information Technology Courses</p></center>
             <hr>
           </div>
           
           <div class="child-grid1">
             <label class="custom-field two">
-                <select type="text" style="width: 215px;" name="Integrative_Programming_and_Tech_1st" id="drop-down" placeholder="">
+                <select type="text" style="width: 250px;" name="Integrative_Programming_and_Tech_1st" id="drop-down" placeholder="">
                   <option value="0">Select Grade</option>
                   <option value="0">INC</option>
                   <option value="5">DRP</option>
@@ -500,10 +506,10 @@
                   <option value="2.75">2.75</option>
                   <option value="3">3</option>
                 </select>
-                <span class="placeholder" style="padding-bottom: 27px; color:#7A7C80; z-index: -1">Integrative Programming and Tech</span>
+                <span class="placeholder" style="padding-bottom: 27px; color: white; z-index: -1; font-style: italic">Integrative Programming and Tech</span>
             </label>
             <label class="custom-field two">
-                <select type="text" name="Integrative_Programming_and_Tech_2nd" style="width: 80px; margin-right: 20px" id="drop-down" placeholder="">
+                <select type="text" name="Integrative_Programming_and_Tech_2nd" style="width: 80px; margin-right: 40px" id="drop-down" placeholder="">
                   <option value="0">Select</option>
                   <option value="0">INC</option>
                   <option value="5">DRP</option>
@@ -517,10 +523,10 @@
                   <option value="2.75">2.75</option>
                   <option value="3">3</option>
                 </select>
-                <span class="placeholder" style="padding-bottom: 27px; color:#7A7C80; z-index: -1">2nd Try</span>
+                <span class="placeholder" style="padding-bottom: 27px; color: white; z-index: -1; font-style: italic">2nd Try</span>
             </label>
             <label class="custom-field two">
-              <select type="text" style="width: 215px;" name="System_Integration_and_Architecture_1st" id="drop-down" placeholder="">
+              <select type="text" style="width: 250px;" name="System_Integration_and_Architecture_1st" id="drop-down" placeholder="">
                 <option value="0">Select Grade</option>
                 <option value="0">INC</option>
                 <option value="5">DRP</option>
@@ -534,7 +540,7 @@
                 <option value="2.75">2.75</option>
                 <option value="3">3</option>
               </select>
-              <span class="placeholder" style="padding-bottom: 27px; color:#7A7C80; z-index: -1">System Integration and Architecture</span>
+              <span class="placeholder" style="padding-bottom: 27px; color: white; z-index: -1; font-style: italic">System Integration and Architecture</span>
           </label>
           <label class="custom-field two">
               <select type="text" name="System_Integration_and_Architecture_2nd" style="width: 80px;" id="drop-down" placeholder="">
@@ -551,12 +557,12 @@
                 <option value="2.75">2.75</option>
                 <option value="3">3</option>
               </select>
-              <span class="placeholder" style="padding-bottom: 27px; color:#7A7C80; z-index: -1">2nd Try</span>
+              <span class="placeholder" style="padding-bottom: 27px; color: white; z-index: -1; font-style: italic">2nd Try</span>
           </label>
         </div>
             <div class="child-grid1">
               <label class="custom-field two">
-                  <select type="text" style="width: 215px;" name="Information_Assurance_and_Security_1_1st" id="drop-down" placeholder="">
+                  <select type="text" style="width: 250px;" name="Information_Assurance_and_Security_1_1st" id="drop-down" placeholder="">
                     <option value="0">Select Grade</option>
                     <option value="0">INC</option>
                     <option value="5">DRP</option>
@@ -570,10 +576,10 @@
                     <option value="2.75">2.75</option>
                     <option value="3">3</option>
                   </select>
-                  <span class="placeholder" style="padding-bottom: 27px; color:#7A7C80; z-index: -1">Information Assurance and Security 1</span>
+                  <span class="placeholder" style="padding-bottom: 27px; color: white; z-index: -1; font-style: italic">Information Assurance and Security 1</span>
               </label>
               <label class="custom-field two">
-                  <select type="text" name="Information_Assurance_and_Security_1_2nd" style="width: 80px; margin-right: 20px" id="drop-down" placeholder="">
+                  <select type="text" name="Information_Assurance_and_Security_1_2nd" style="width: 80px; margin-right: 40px" id="drop-down" placeholder="">
                     <option value="0">Select</option>
                     <option value="0">INC</option>
                     <option value="5">DRP</option>
@@ -587,10 +593,10 @@
                     <option value="2.75">2.75</option>
                     <option value="3">3</option>
                   </select>
-                  <span class="placeholder" style="padding-bottom: 27px; color:#7A7C80; z-index: -1">2nd Try</span>
+                  <span class="placeholder" style="padding-bottom: 27px; color: white; z-index: -1; font-style: italic">2nd Try</span>
               </label>
               <label class="custom-field two">
-                <select type="text" style="width: 215px;" name="Information_Assurance_and_Security_2_1st" id="drop-down" placeholder="">
+                <select type="text" style="width: 250px;" name="Information_Assurance_and_Security_2_1st" id="drop-down" placeholder="">
                   <option value="0">Select Grade</option>
                   <option value="0">INC</option>
                   <option value="5">DRP</option>
@@ -604,7 +610,7 @@
                   <option value="2.75">2.75</option>
                   <option value="3">3</option>
                 </select>
-                <span class="placeholder" style="padding-bottom: 27px; color:#7A7C80; z-index: -1">Information Assurance and Security 2</span>
+                <span class="placeholder" style="padding-bottom: 27px; color: white; z-index: -1; font-style: italic">Information Assurance and Security 2</span>
             </label>
             <label class="custom-field two">
                 <select type="text" name="Information_Assurance_and_Security_2_2nd" style="width: 80px;" id="drop-down" placeholder="">
@@ -621,12 +627,12 @@
                   <option value="2.75">2.75</option>
                   <option value="3">3</option>
                 </select>
-                <span class="placeholder" style="padding-bottom: 27px; color:#7A7C80; z-index: -1">2nd Try</span>
+                <span class="placeholder" style="padding-bottom: 27px; color: white; z-index: -1; font-style: italic">2nd Try</span>
             </label>
           </div>
           <div class="child-grid1">
             <label class="custom-field two">
-                <select type="text" style="width: 215px;" name="Software_Engineering_1st" id="drop-down" placeholder="">
+                <select type="text" style="width: 250px;" name="Software_Engineering_1st" id="drop-down" placeholder="">
                   <option value="0">Select Grade</option>
                   <option value="0">INC</option>
                   <option value="5">DRP</option>
@@ -640,10 +646,10 @@
                   <option value="2.75">2.75</option>
                   <option value="3">3</option>
                 </select>
-                <span class="placeholder" style="padding-bottom: 27px; color:#7A7C80; z-index: -1">Software Engineering</span>
+                <span class="placeholder" style="padding-bottom: 27px; color: white; z-index: -1; font-style: italic">Software Engineering</span>
             </label>
             <label class="custom-field two">
-                <select type="text" name="Software_Engineering_2nd" style="width: 80px; margin-right: 20px" id="drop-down" placeholder="">
+                <select type="text" name="Software_Engineering_2nd" style="width: 80px; margin-right: 40px" id="drop-down" placeholder="">
                   <option value="0">Select</option>
                   <option value="0">INC</option>
                   <option value="5">DRP</option>
@@ -657,10 +663,10 @@
                   <option value="2.75">2.75</option>
                   <option value="3">3</option>
                 </select>
-                <span class="placeholder" style="padding-bottom: 27px; color:#7A7C80; z-index: -1">2nd Try</span>
+                <span class="placeholder" style="padding-bottom: 27px; color: white; z-index: -1; font-style: italic">2nd Try</span>
             </label>
             <label class="custom-field two">
-              <select type="text" style="width: 215px;" name="Networking_1_1st" id="drop-down" placeholder="">
+              <select type="text" style="width: 250px;" name="Networking_1_1st" id="drop-down" placeholder="">
                 <option value="0">Select Grade</option>
                 <option value="0">INC</option>
                 <option value="5">DRP</option>
@@ -674,7 +680,7 @@
                 <option value="2.75">2.75</option>
                 <option value="3">3</option>
               </select>
-              <span class="placeholder" style="padding-bottom: 27px; color:#7A7C80; z-index: -1">Networking 1</span>
+              <span class="placeholder" style="padding-bottom: 27px; color: white; z-index: -1; font-style: italic">Networking 1</span>
           </label>
           <label class="custom-field two">
               <select type="text" name="Networking_1_2nd" style="width: 80px;" id="drop-down" placeholder="">
@@ -691,12 +697,12 @@
                 <option value="2.75">2.75</option>
                 <option value="3">3</option>
               </select>
-              <span class="placeholder" style="padding-bottom: 27px; color:#7A7C80; z-index: -1">2nd Try</span>
+              <span class="placeholder" style="padding-bottom: 27px; color: white; z-index: -1; font-style: italic">2nd Try</span>
           </label>
         </div>
         <div class="child-grid1">
           <label class="custom-field two">
-              <select type="text" style="width: 215px;" name="Networking_2_1st" id="drop-down" placeholder="">
+              <select type="text" style="width: 250px;" name="Networking_2_1st" id="drop-down" placeholder="">
                 <option value="0">Select Grade</option>
                 <option value="0">INC</option>
                 <option value="5">DRP</option>
@@ -710,10 +716,10 @@
                 <option value="2.75">2.75</option>
                 <option value="3">3</option>
               </select>
-              <span class="placeholder" style="padding-bottom: 27px; color:#7A7C80; z-index: -1">Networking 2</span>
+              <span class="placeholder" style="padding-bottom: 27px; color: white; z-index: -1; font-style: italic">Networking 2</span>
           </label>
           <label class="custom-field two">
-              <select type="text" name="Networking_2_2nd" style="width: 80px; margin-right: 20px" id="drop-down" placeholder="">
+              <select type="text" name="Networking_2_2nd" style="width: 80px; margin-right: 40px" id="drop-down" placeholder="">
                 <option value="0">Select</option>
                 <option value="0">INC</option>
                 <option value="5">DRP</option>
@@ -727,10 +733,10 @@
                 <option value="2.75">2.75</option>
                 <option value="3">3</option>
               </select>
-              <span class="placeholder" style="padding-bottom: 27px; color:#7A7C80; z-index: -1">2nd Try</span>
+              <span class="placeholder" style="padding-bottom: 27px; color: white; z-index: -1; font-style: italic">2nd Try</span>
           </label>
           <label class="custom-field two">
-            <select type="text" style="width: 215px;" name="WebProg_1st" id="drop-down" placeholder="">
+            <select type="text" style="width: 250px;" name="WebProg_1st" id="drop-down" placeholder="">
               <option value="0">Select Grade</option>
               <option value="0">INC</option>
               <option value="5">DRP</option>
@@ -744,7 +750,7 @@
               <option value="2.75">2.75</option>
               <option value="3">3</option>
             </select>
-            <span class="placeholder" style="padding-bottom: 27px; color:#7A7C80; z-index: -1">Web Programming</span>
+            <span class="placeholder" style="padding-bottom: 27px; color: white; z-index: -1; font-style: italic">Web Programming</span>
         </label>
         <label class="custom-field two">
             <select type="text" name="WebProg_2nd" style="width: 80px;" id="drop-down" placeholder="">
@@ -761,12 +767,12 @@
               <option value="2.75">2.75</option>
               <option value="3">3</option>
             </select>
-            <span class="placeholder" style="padding-bottom: 27px; color:#7A7C80; z-index: -1">2nd Try</span>
+            <span class="placeholder" style="padding-bottom: 27px; color: white; z-index: -1; font-style: italic">2nd Try</span>
         </label>
       </div>
         <div class="anchorCon">
             <a href="/"><h4 class="itDep"><i class="fas fa-home"></i> Home</h4></a>
-            <button style="background: none; border: none" type="submit"><a href=""><h4 class="csDep" data-popup-open="popupID"><i class="fas fa-bullseye"></i> Start Prediction</h4></a></button>
+            <button style="background: none; border: none" type="submit"><a href="/ITend"><h4 class="csDep" data-popup-open="popupID"><i class="fas fa-bullseye"></i> Start Prediction</h4></a></button>
         </div>
     </div>
   </form>
@@ -785,7 +791,7 @@ body{
     margin: 0;
     padding: 0;
     font-family: 'Roboto', sans-serif;
-    background-color: #101214;
+    background-color: #1F2937;
     color: #7A7C80;
 }
 
@@ -816,8 +822,13 @@ ul{
 .grid-con {
   display: grid;
   /*grid-row: auto;*/
-  grid-template-columns: repeat(auto-fit, minmax(300px, 2fr));
-  gap: 25px;
+  background-color: #111a28;
+  padding: 0px 435px 0px 435px;
+  border-radius: 10px;
+  border-color: white;
+  z-index: 0;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 2fr));
+  gap: 45px;
 }
 /*Grid End*/
 .white:hover{
@@ -870,7 +881,7 @@ ul{
     font-size: 14px;
     border-top: 20px solid transparent;
     margin-bottom: 5px;
-    --field-padding: 12px;
+    --field-padding: 15px;
   }
   
   .custom-field select {
@@ -982,5 +993,26 @@ ul{
     .grid-2{
         grid-template-columns: 1fr;
     }
+}
+
+/* HEADER */
+a{
+  color: #c2c8cf;
+  text-decoration: none;
+}
+
+.header {
+  background-color: #111a28;
+  margin: 0;
+  padding: 15px 0;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  
+}
+
+.logo {
+  font-size: 24px;
+  color: #F9FAF8;
 }
 </style>

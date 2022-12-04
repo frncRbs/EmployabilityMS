@@ -12,376 +12,151 @@
     <title>Information Technology Prediction Result</title>
 </head>
 <body>
-    <div class="grid-2">
-        <div class="section-1">
-            <!-- <i class="fas fa-code fa-5x white"></i> -->
-            <!-- <img src="https://www.cloudanalogy.co.uk/wp-content/uploads/2019/06/react.png"> -->
-            <img src="https://i.ibb.co/SrRq3zj/300593177-489042066395656-6251703410857689977-n-removebg-preview.png" 
-            alt="300593177-489042066395656-6251703410857689977-n-removebg-preview" border="0" width="400" height="400">
-            <h2 class="labeledTitle">Information Technology Prediction Result</h2>
-        </div>
-        <div class="section-2">
-            <h2>About</h2>
-            <p> The proposed system aims to support students to predict their employment chances allowing them to enhance their 
-                skills at early stage to meet job market requirements in Philippines. In this study,
-                the used data belong to students that graduated three years ago, thus the prediction window size is three years.</p>
-            <h2>Instruction</h2>
-            <ol>
-                <li>To start click on the Start Prediction labeled below</li>
-                <li>The system will request the student to input grades in respective major courses</li>
-                <li>It then output the particular job the student will end up in the future</li>
-                <li>Also outputs the top 5 major courses the student should improve to secure an IT related job</li>
-            </ol>
-
-            <h2>IT/CS Major Courses</h2>
-            <ul>
-                <li>Software Engineering 1 & 2</li>
-                <li>Computer Programming 1 & 2</li>
-                <li>Electives 1, 2 & 3</li>
-                <li>Networking 1 & 2</li>
-                <li>Information Assurance and Security 1 & 2</li>
-                <li>Database Management System 1 & 2</li>
-                <li>Data Structures and Algorithms</li>
-                <li>Application Dev and Emerging Tech</li>
-                <li>Modelling and Simulation</li>
-                <li>Digital Design</li>
-                <li>Operating Systems</li>
-                <li>Web Programming</li>
-                <li>Computer Organization and Assembly Language.</li>
-                <li>Programming Languages</li>
-                <li>Design and Analysis of Algorithms</li>
-                <li>Practicum/Industry Immersion</li>
-                <li>Digital Design</li>
-                <li>Programming Languages</li>
-                <li>Modelling and Simulation</li>
-                <li>Network Management</li>
-                <li>Advance Database</li>
-                <li>Integrative Programming and Tech</li>
-                <li>System Integration and Architecture</li>
-            </ul>
-            <a href="#" style="display: inline" ><h2 class="startBtn" data-popup-open="popupID"><i class="fas fa-bullseye"></i> Start Prediction</h2></a>
-        </div>
-    </div>
-
-    <div class="popup" id="popupID">
-        <div class="popup__inner">
-          <div class="popup__container">
-            <!-- <div class="popup__close popup-close" data-popup-close>
-              <div class="svg-icon">&#10006;</div>
-            </div> -->
-            <div class="popup__content">
-              <!-- your content -->
-              <div class="form">
-                <h2 style="color: white"><i class="fas fa-search"></i> Which department you are under?</h2>
-                <div class="anchorCon">
-                  <a href="/predictCS"><h4 class="itDep">COMPUTER SCIENCE</h4></a>
-                  <a href="predictIT"><h4 class="csDep">INFORMATION TECHNOLOGY</h4></a>
-                </div>
-              </div>
+    <main>
+        <div class="header">
+            <div class="logo">
+                <h3>Information Technology Prediction Result</h3>
             </div>
-          </div>
+            <div class="nav">
+                <a href="#">Link One</a>
+                <a href="#">Link Two</a>
+                <a href="#">Link Three</a>
+            </div>
         </div>
-      </div>
-     </div>
+
+        <!-- HERO SECTION -->
+        <div class="hero">
+            <div class="right">
+                <p class="title">Based on the system calculations</p>
+                <p class="subtitle" style="color: grey">{{ label_text1 }}</p>
+                <p class="subtitle" style="color: grey">{{ label_text2 }}</p>                   
+                <div class="anchorCon">
+                  <a href="/predictIT"><h4 class="itDep">Predict Again?</h4></a>
+                </div>
+            </div>
+            <div class="left">
+                <div class="center-div">
+                  <center><h1 style="color: grey" id="pred2"><i><b style="color: green">{{ prediction_text2 }}</b></i></h1></center>
+                  <center><h1 style="color: grey" id="pred3"><i><b style="color: green">{{ prediction_text3 }}</b></i></h1></center>
+                  <center><h1 style="color: grey" id="pred4"><i><b style="color: green">{{ prediction_text4 }}</b></i></h1></center>
+                  <center><h1 style="color: grey" id="pred1"><i><b style="color: green">{{ prediction_text1 }}</b></i></h1></center>
+                  <center><h1 style="color: grey"><i><b style="color: green">{{ course_suggestion1 }}</b></i></h1></center>
+                  <center><h1 style="color: grey"><i><b style="color: green">{{ course_suggestion2 }}</b></i></h1></center>
+                </div>
+            </div>
+        </div>
+      </main>
 </body>
 </html>
 
 <style>
 /* global */
-@import url('https://fonts.googleapis.com/css?family=Roboto');
-
-.grid-2{
-    padding: 0;
-    margin: 0;
-    display: grid;
-    grid-template-columns: repeat(2,1fr);
-}
-
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;1,100;1,300;1,700&display=swap');
 body{
-    margin: 0;
-    padding: 0;
-    font-family: 'Roboto', sans-serif;
-    background-color: #101214;
-    color: #7A7C80;
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+  background-color: #111a28;
+  color: #c2c8cf;
 }
 
-h2,.white{
-    color: #fff;
+.main {
+  width: 100vw;
+  height: auto;
+  display: flex;
+  flex-direction: column;
 }
 
+/* HEADER */
 a{
-    color: #7A7C80;
-    text-decoration: none;
-}
-/* section 1 */
-.section-1{
-    padding-top: 10vh;
-    text-align: center;
-}
-
-.section-1 p{
-    font-size: 1.1rem;
-    padding-bottom: 10px;
-    margin:0;
-}
-
-.section-1 h2{
-    font-size: 1.7rem;
-    margin-bottom: 10px;
-}
-
-.section-1 a{
-    font-size: 1.5rem;
-    padding: 10px;
-}
-/* section 2 */
-.section-2{
-    padding-top: 5vh;
-    width: 70%;
-}
-
-.section-2 h2{
-    font-size: 1.7rem;
-    margin-bottom: 10px;
-}
-
-.section-2 p{
-    font-size: 1.1rem;
-    padding-bottom: 10px;
-    margin:0;
-}
-
-.section-2 a{
-    display: block;
-    padding: 5px;
-    font-size: 1.2rem;
-    padding-left: 0;
-    width: 100px;
-}
-ul{
-    -moz-column-count: 2;
-    -webkit-column-count: 2;
-    column-count: 2;
+  color: #c2c8cf;
+  text-decoration: none;
 }
 .anchorCon{
   display: flex;
   justify-content: center;
   column-gap: 35px;
 }
-.csDep{
+
+.itDep{
   background-color: rgba(0,128,0,0.8);  
   border-radius: 5px;
   color: white;
   padding: .5em;
   text-decoration: none;
 }
-
-.itDep{
-  background-color: rgba(192,192,192,0.8);  
-  border-radius: 5px;
-  color: white;
-  padding: .5em;
-  text-decoration: none;
-}
-.anchorCon .csDep:hover, .itDep:hover{
+.anchorCon .itDep:hover{
   font-size: 1.2rem;
   cursor: pointer;
   transition: 1.0s;
   color: black;
 }
 
-/*.section-2 .startBtn:hover{
-  font-size: 2.0rem;
-  color: #fff;
-  cursor: pointer;
-  transition: 0.6s;
-}*/
-/*PopUp Start*/
-#wrapper {
-    width: 100%;
-    overflow: hidden;
-    display: flex;
-    min-height: 100vh;
-  }
-  #wrapper main {
-    margin: auto;
-    text-align: center;
-  }
-  
-  button {
-    margin-top: 10rem;
-    padding: 0.5em 1em;
-    background-color: #121212;
-    border: 2px solid #eee;
-    font-size: 1.5rem;
-    color: inherit;
-    box-shadow: rgba(0, 0, 0, 0.8) 0px 13px 27px -5px, rgba(0, 0, 0, 0.7) 0px 8px 16px -8px;
-    transition: background-color 0.3s ease-in-out;
-  }
-  button:hover {
-    background-color: #000;
-  }
-  button:active {
-    box-shadow: rgba(0, 0, 0, 0.8) 0px 4px 20px -5px, rgba(0, 0, 0, 0.7) 0px 8px 16px -8px;
-  }
-  
-  .page-content {
-    max-width: 30rem;
-    margin: 10rem auto 0;
-    color: #ddd;
-    text-align: left;
-  }
-  
-  .form {
-    width: 100%;
-    max-width: 30rem;
-    padding: 2rem;
-    border-radius: 10px;
-    background-color: #101214;
-    box-shadow: rgba(0, 0, 0, 0.8) 0px 13px 27px -5px, rgba(0, 0, 0, 0.7) 0px 8px 16px -8px;
-    color: #eee;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(50px);
-  }
-  .popup--show .form {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-    transition: all 0.3s ease-in-out;
-  }
-  .form h2 {
-    text-align: center;
-  }
-  
-  .popup {
-    position: fixed;
-    z-index: 100;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-    overflow: hidden auto;
-  }
-  .popup--show {
-    opacity: 1;
-    visibility: visible;
-    pointer-events: initial;
-  }
-  .popup__inner {
-    width: inherit;
-    height: inherit;
-  }
-  .popup__container {
-    padding: 2rem 1rem;
-    display: flex;
-    flex-direction: column;
-    min-height: 85%;
-  }
-  .popup__content {
-    flex-grow: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    z-index: 1;
-  }
-  .popup__close {
-    text-align: right;
-    margin-bottom: 1rem;
-    font-size: 1.5rem;
-  }
-  
-  .popup-close {
-    cursor: pointer;
-    opacity: 0.7;
-    transition: opacity 0.3s ease-in-out;
-  }
-  .popup-close:hover {
-    opacity: 1;
-  }
-  
-  .popup-active {
-    overflow: hidden;
-  }
-  @media (any-hover: hover) {
-    .popup-active {
-      padding-right: var(--scroll-width);
-    }
-  }
-/*PopUp End*/
-
-/* animations / utilities */
-.section-2 a:hover{
-    font-size: 1.3rem;
-    color: #fff;
-    cursor: pointer;
-    transition: 0.2s;
-}
-
-.section-2 p:hover{
-    font-size: 1.2rem;
-    cursor: pointer;
-    transition: 1.0s;
-}
-
-.section-2 li:hover{
-    font-size: 1.2rem;
-    cursor: pointer;
-    transition: 1.0s;
-}
-
-.section-2 .startBtn:hover{
-    font-size: 2.0rem;
-    color: #fff;
-    cursor: pointer;
-    transition: 0.6s;
-}
-
-.section-1 .labeledTitle:hover{
-    font-size: 2.0rem;
-    color: #fff;
-    cursor: pointer;
-    transition: 0.6s;
-}
-.section-1 img{
-  background-color: transparent;
+.header {
+  background-color: #111a28;
+  margin: 0;
+  padding: 15px 0;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
   
 }
-.section-1 img:hover{
-    font-size: 2.0rem;
-    cursor: pointer;
-    transition: 0.6s;
-}
-.section-1 a:hover{
-    color: #fff;
-    cursor: pointer;
-    transition: 0.3s;
+
+.logo {
+  font-size: 24px;
+  color: #F9FAF8;
 }
 
-
-.white:hover{
-    position: relative;
-    padding-left: 10px;
+.nav a {
+  text-decoration: none;
+  color: #E5E7EB;
+  font-size: 18px;
+  font-weight: 300;
+  margin: 10px;
+  padding: 5px;
 }
 
-/* media queres */
-@media(max-width:780px){
-    .grid-2{
-        grid-template-columns: 1fr;
-    }
-    .section-1{
-        padding:0;
-        padding-top: 5rem;
-    }
-    .section-2{
-        padding: 0;
-        padding-left: 1.5rem;
-        padding-top: 2rem;
-    }
+/* HERO SECTION */
+
+.hero {
+  background-color: #1F2937;
+  padding: 90px 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.right {
+  width: 500px;
+}
+
+.title {
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 1em;
+  color: #F9FAF8;
+}
+
+.subtitle {
+  color: #E5E7EB;
+  font-size: 18px;
+  font-weight: 300;
+  margin: 15px 0;
+}
+
+.left{
+  background-color: #111a28;
+  width: auto;
+  height: auto;
+  padding: 50px;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.center-div{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  display: inline-block;
 }
 </style>
