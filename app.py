@@ -11,6 +11,7 @@ import json
 import plotly
 import plotly.express as px
 import random
+import math
 
 dataset = pd.read_csv("model/Institute-of-Computer-Studies-Graduate-Tracer-Study-2021-2022-Responses(ALTERED).csv")
 
@@ -227,10 +228,10 @@ def predict_IT():
         prediction = [prediction.replace(predIT, '0')for prediction in prediction]
         prediction.append(predIT)
         
-        fetch1 = recall(actual, prediction, K)
-        fetch2 = recall(actual, prediction, K-1)
-        fetch3 = recall(actual, prediction, K-2)
-        fetch4 = recall(actual, prediction, K-3)
+        fetch1 = 0.0
+        fetch2 = 0.0
+        fetch3 = 0.0
+        fetch4 = 0.0
         
         fetchPred1 = prediction[0]
         fetchPred2 = prediction[-1]
@@ -275,21 +276,73 @@ def predict_CS():
         prediction = [prediction.replace(predCS, '0')for prediction in prediction]
         prediction.append(predCS)
         
-        fetch1 = 0.0
-        fetch2 = 0.0
-        fetch3 = 0.0
-        fetch4 = 0.0
-        
+        fetch1 = recall(actual, prediction, K)
+        if fetch1 == 1.0:
+            fetch1 = 100
+        elif fetch1 == 0.75:
+            fetch1 = 75
+        elif fetch1 == 0.67:
+            fetch1 = 67
+        elif fetch1 == 0.5:
+            fetch1 = 50
+        elif fetch1 == 0.33:
+            fetch1 = 33
+        elif fetch1 == 0.25:
+            fetch1 = 25
+            
+        fetch2 = recall(actual, prediction, K-1)
+        if fetch2 == 1.0:
+            fetch2 = 100
+        elif fetch2 == 0.75:
+            fetch2 = 75
+        elif fetch2 == 0.67:
+            fetch2 = 67
+        elif fetch2 == 0.5:
+            fetch2 = 50
+        elif fetch2 == 0.33:
+            fetch2 = 33
+        elif fetch2 == 0.25:
+            fetch2 = 25
+            
+        fetch3 = recall(actual, prediction, K-2)
+        if fetch3 == 1.0:
+            fetch3 = 100
+        elif fetch3 == 0.75:
+            fetch3 = 75
+        elif fetch3 == 0.67:
+            fetch3 = 67
+        elif fetch3 == 0.5:
+            fetch3 = 50
+        elif fetch3 == 0.33:
+            fetch3 = 33
+        elif fetch3 == 0.25:
+            fetch3 = 25
+            
+        fetch4 = recall(actual, prediction, K-3)
+        if fetch4 == 1.0:
+            fetch4 = 100
+        elif fetch4 == 0.75:
+            fetch4 = 75
+        elif fetch4 == 0.67:
+            fetch4 = 67
+        elif fetch4 == 0.5:
+            fetch4 = 50
+        elif fetch4 == 0.33:
+            fetch4 = 33
+        elif fetch4 == 0.25:
+            fetch4 = 25
+            
         fetchPred1 = prediction[0]
         fetchPred2 = prediction[-1]
         fetchPred3 = prediction[-2]
         fetchPred4 = prediction[-3]
         
+            
         return render_template("CSend.html", 
-                               prediction_text1 = "" if fetch1 == 0.0 or fetch1 == 0.0 and fetch2 == 0.0 and fetch3 == 0.0 and fetch4 == 0.0 or fetch2 == 1.0 and fetchPred2 == "Administrative Assistant" or fetchPred1 == '0' else "{}".format(f"{prediction[K]} = {fetch1}%"), 
-                               prediction_text2 = "" if fetch2 == 0.0 or fetch1 == 0.0 and fetch2 == 0.0 and fetch3 == 0.0 and fetch4 == 0.0 or fetch2 == 1.0 and fetchPred2 == "Administrative Assistant" or fetchPred2 == '0' else "{}".format(f"{prediction[K-1]} = {fetch2}%"),
-                               prediction_text3 = "" if fetch3 == 0.0 or fetch1 == 0.0 and fetch2 == 0.0 and fetch3 == 0.0 and fetch4 == 0.0 or fetch2 == 1.0 and fetchPred2 == "Administrative Assistant" or fetchPred3 == '0' else "{}".format(f"{prediction[K-2]} = {fetch3}%"),
-                               prediction_text4 = "" if fetch4 == 0.0 or fetch1 == 0.0 and fetch2 == 0.0 and fetch3 == 0.0 and fetch4 == 0.0 or fetch2 == 1.0 and fetchPred2 == "Administrative Assistant" or fetchPred4 == '0' else "{}".format(f"{prediction[K-3]} = {fetch4}%"),
+                               prediction_text1 = "" if fetch1 == 0.0 or fetch1 == 0.0 and fetch2 == 0.0 and fetch3 == 0.0 and fetch4 == 0.0 or fetch2 == 1.0 and fetchPred2 == "Administrative Assistant" or fetchPred1 == '0' else "{}".format(f"{prediction[K]} : {fetch1}%"), 
+                               prediction_text2 = "" if fetch2 == 0.0 or fetch1 == 0.0 and fetch2 == 0.0 and fetch3 == 0.0 and fetch4 == 0.0 or fetch2 == 1.0 and fetchPred2 == "Administrative Assistant" or fetchPred2 == '0' else "{}".format(f"{prediction[K-1]} : {fetch2}%"),
+                               prediction_text3 = "" if fetch3 == 0.0 or fetch1 == 0.0 and fetch2 == 0.0 and fetch3 == 0.0 and fetch4 == 0.0 or fetch2 == 1.0 and fetchPred2 == "Administrative Assistant" or fetchPred3 == '0' else "{}".format(f"{prediction[K-2]} : {fetch3}%"),
+                               prediction_text4 = "" if fetch4 == 0.0 or fetch1 == 0.0 and fetch2 == 0.0 and fetch3 == 0.0 and fetch4 == 0.0 or fetch2 == 1.0 and fetchPred2 == "Administrative Assistant" or fetchPred4 == '0' else "{}".format(f"{prediction[K-3]} : {fetch4}%"),
                                prediction_label1 = "" if fetch2 == 0.0 or fetch1 == 0.0 and fetch2 == 0.0 and fetch3 == 0.0 and fetch4 == 0.0 or fetch2 == 1.0 and fetchPred2 == "Administrative Assistant" else "{}".format(f"{prediction[K-1]} is a more likely career path for you. Congratulations!"),
                                prediction_label2 = "{}".format(f"Nothing follows...") if fetch1 == 0.0 and fetch3 == 0.0 and fetch4 == 0.0 else "",
                                job_label1 = "{}".format(f"{prediction[K-1]} = {fetch2}%") if fetch2 == 1.0 and fetchPred2 == "Administrative Assistant" else "",

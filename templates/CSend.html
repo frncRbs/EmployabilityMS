@@ -18,13 +18,12 @@
                 <h3>Computer Science Prediction Result</h3>
             </div>
             <div class="nav">
-                <a href="#">Link One</a>
-                <a href="#">Link Two</a>
-                <a href="#">Link Three</a>
+                <h3 href="/" style="cursor: pointer"> <i class="fas fa-home"></i> Home</h3>
             </div>
         </div>
 
         <!-- HERO SECTION -->
+        <hr>
         <div class="hero">
             <div class="right">
                 <p class="title">Based on our system calculations</p>
@@ -33,24 +32,25 @@
                 <p class="subtitle" style="color: grey; font-weight: bold; font-size: x-large;">{{ prediction_label1 }}</p>
                 <p class="subtitle" style="color: grey; font-weight: bold; font-size: x-large;">{{ prediction_label2 }}</p>               
                 <div class="anchorCon">
-                  <a href="/predictCS"><h4 class="csDep">Predict Again?</h4></a>
+                  <a href="/predictCS" style="border-color: black;"><h4 class="csDep">Predict Again</h4></a>
                 </div>
             </div>
             <div class="left">
                 <div class="center-div">
-                  <center><h1 style="color: grey" id="job_label"><b style="color: grey">{{ job_label2 }}</b></h1></center>
-                  <center><h1 style="color: grey" id="job_label"><i></i><b style="color: green">{{ job_label1 }}</b></i></h1></center>
+                  <center><p class="job_labels">{{ job_label1 }}</p></center>
+                  <center><p class="job_labels">{{ job_label2 }}</p></center>
 
-                  <center><h1 style="color: grey" id="prediction_text2"><i><b style="color: green">{{ prediction_text2 }}</b></i></h1></center>
-                  <center><h1 style="color: grey" id="prediction_text3"><i><b style="color: green">{{ prediction_text3 }}</b></i></h1></center>
-                  <center><h1 style="color: grey" id="prediction_text4"><i><b style="color: green">{{ prediction_text4 }}</b></i></h1></center>
-                  <center><h1 style="color: grey" id="prediction_text1"><i><b style="color: green">{{ prediction_text1 }}</b></i></h1></center>
+                  <center><h1 style="color: grey" id="prediction_text2"><i><b style="color: white">{{ prediction_text2 }}</b></i></h1></center>
+                  <center><h1 style="color: grey" id="prediction_text3"><i><b style="color: white">{{ prediction_text3 }}</b></i></h1></center>
+                  <center><h1 style="color: grey" id="prediction_text4"><i><b style="color: white">{{ prediction_text4 }}</b></i></h1></center>
+                  <center><h1 style="color: grey" id="prediction_text1"><i><b style="color: white">{{ prediction_text1 }}</b></i></h1></center>
 
-                  <center><h2 style="color: grey"><i><b style="color: green">{{ course_suggestion1 }}</b></i></h2></center>
-                  <center><h2 style="color: grey"><i><b style="color: green">{{ course_suggestion2 }}</b></i></h2></center>
+                  <center><h2 style="color: grey"><i><b style="color: white">{{ course_suggestion1 }}</b></i></h2></center>
+                  <center><h2 style="color: grey"><i><b style="color: white">{{ course_suggestion2 }}</b></i></h2></center>
                 </div>
             </div>
         </div>
+        <hr>
       </main>
 </body>
 </html>
@@ -62,7 +62,7 @@ body{
   margin: 0;
   padding: 0;
   font-family: 'Roboto', sans-serif;
-  background-color: #111a28;
+  background-color: #18A558;
   color: #c2c8cf;
 }
 
@@ -73,8 +73,15 @@ body{
   flex-direction: column;
 }
 
+.job_labels{
+  font-size: 38px;
+  font-weight: 700;
+  line-height: 1em;
+  color: black;
+}
 /* HEADER */
 a{
+  font-size: large;
   color: #c2c8cf;
   text-decoration: none;
 }
@@ -85,22 +92,24 @@ a{
 }
 
 .csDep{
-  background-color: rgba(0,128,0,0.8);  
+  background-color: #18A558;
   border-radius: 5px;
+  border-color: black;
   color: white;
   padding: .5em;
   text-decoration: none;
 }
+
 .anchorCon .csDep:hover{
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   cursor: pointer;
   transition: 1.0s;
+  border-color: black;
   color: black;
-  
 }
 
 .header {
-  background-color: #111a28;
+  background-color: #18A558;
   margin: 0;
   padding: 15px 0;
   display: flex;
@@ -126,7 +135,7 @@ a{
 /* HERO SECTION */
 
 .hero {
-  background-color: #1F2937;
+  background-color: white;
   padding: 90px 70px;
   display: flex;
   justify-content: center;
@@ -140,7 +149,7 @@ a{
   font-size: 48px;
   font-weight: 700;
   line-height: 1em;
-  color: #F9FAF8;
+  color: black;
 }
 
 .subtitle {
@@ -151,7 +160,7 @@ a{
 }
 
 .left{
-  background-color: #111a28;
+  background-color: #18A558;
   width: auto;
   height: auto;
   max-width:720px;
