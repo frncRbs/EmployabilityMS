@@ -28,20 +28,26 @@
         <div class="hero">
             <div class="right">
                 <p class="title">Based on the system calculations</p>
-                <p class="subtitle" style="color: grey">{{ label_text1 }}</p>
-                <p class="subtitle" style="color: grey">{{ label_text2 }}</p>                   
+                <p class="subtitle" style="color: grey; font-weight: bolder">{{ label_text1 }}</p>
+                <p class="subtitle" style="color: grey; font-weight: bolder">{{ label_text2 }}</p>
+                <p class="subtitle" style="color: grey; font-weight: bolder">{{ prediction_label1 }}</p>
+                <p class="subtitle" style="color: grey; font-weight: bolder">{{ prediction_label2 }}</p>               
                 <div class="anchorCon">
                   <a href="/predictIT"><h4 class="itDep">Predict Again?</h4></a>
                 </div>
             </div>
             <div class="left">
                 <div class="center-div">
-                  <center><h1 style="color: grey" id="pred2"><i><b style="color: green">{{ prediction_text2 }}</b></i></h1></center>
-                  <center><h1 style="color: grey" id="pred3"><i><b style="color: green">{{ prediction_text3 }}</b></i></h1></center>
-                  <center><h1 style="color: grey" id="pred4"><i><b style="color: green">{{ prediction_text4 }}</b></i></h1></center>
-                  <center><h1 style="color: grey" id="pred1"><i><b style="color: green">{{ prediction_text1 }}</b></i></h1></center>
-                  <center><h1 style="color: grey"><i><b style="color: green">{{ course_suggestion1 }}</b></i></h1></center>
-                  <center><h1 style="color: grey"><i><b style="color: green">{{ course_suggestion2 }}</b></i></h1></center>
+                  <center><h1 style="color: grey" id="job_label"><b style="color: grey">{{ job_label2 }}</b></h1></center>
+                  <center><h1 style="color: grey" id="job_label"><i></i><b style="color: green">{{ job_label1 }}</b></i></h1></center>
+
+                  <center><h1 style="color: grey" id="prediction_text2"><i><b style="color: green">{{ prediction_text2 }}</b></i></h1></center>
+                  <center><h1 style="color: grey" id="prediction_text3"><i><b style="color: green">{{ prediction_text3 }}</b></i></h1></center>
+                  <center><h1 style="color: grey" id="prediction_text4"><i><b style="color: green">{{ prediction_text4 }}</b></i></h1></center>
+                  <center><h1 style="color: grey" id="prediction_text1"><i><b style="color: green">{{ prediction_text1 }}</b></i></h1></center>
+
+                  <center><h2 style="color: grey"><i><b style="color: green">{{ course_suggestion1 }}</b></i></h2></center>
+                  <center><h2 style="color: grey"><i><b style="color: green">{{ course_suggestion2 }}</b></i></h2></center>
                 </div>
             </div>
         </div>
