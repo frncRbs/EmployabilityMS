@@ -191,6 +191,10 @@ def Home():
 def ITend_view():
     return render_template("ITend.html")
 
+@flask_app.route("/CSend")
+def CSend_view():
+    return render_template("CSend.html")
+
 @flask_app.route("/predictCS")
 def CS_view():
     return render_template("predictCS.html")
@@ -216,17 +220,17 @@ def predict_IT():
             return result
     
     for K in range(0, 3):
-        predIT = "Administrative Assistant"
+        predIT = pred_IT[0]
         actual = new_Ydata_IT
         prediction = ["Software Engineer / Programmer", "Technical Support Specialist", "Academician", "Administrative Assistant"]
         random.shuffle(prediction)
         prediction = [prediction.replace(predIT, '0')for prediction in prediction]
         prediction.append(predIT)
         
-        fetch1 = 0.0
-        fetch2 = 1.0
-        fetch3 = 0.0
-        fetch4 = 0.0
+        fetch1 = recall(actual, prediction, K)
+        fetch2 = recall(actual, prediction, K-1)
+        fetch3 = recall(actual, prediction, K-2)
+        fetch4 = recall(actual, prediction, K-3)
         
         fetchPred1 = prediction[0]
         fetchPred2 = prediction[-1]
@@ -238,7 +242,7 @@ def predict_IT():
                                prediction_text2 = "" if fetch2 == 0.0 or fetch1 == 0.0 and fetch2 == 0.0 and fetch3 == 0.0 and fetch4 == 0.0 or fetch2 == 1.0 and fetchPred2 == "Administrative Assistant" or fetchPred2 == '0' else "{}".format(f"{prediction[K-1]} = {fetch2}%"),
                                prediction_text3 = "" if fetch3 == 0.0 or fetch1 == 0.0 and fetch2 == 0.0 and fetch3 == 0.0 and fetch4 == 0.0 or fetch2 == 1.0 and fetchPred2 == "Administrative Assistant" or fetchPred3 == '0' else "{}".format(f"{prediction[K-2]} = {fetch3}%"),
                                prediction_text4 = "" if fetch4 == 0.0 or fetch1 == 0.0 and fetch2 == 0.0 and fetch3 == 0.0 and fetch4 == 0.0 or fetch2 == 1.0 and fetchPred2 == "Administrative Assistant" or fetchPred4 == '0' else "{}".format(f"{prediction[K-3]} = {fetch4}%"),
-                               prediction_label1 = "" if fetch2 == 0.0 or fetch1 == 0.0 and fetch2 == 0.0 and fetch3 == 0.0 and fetch4 == 0.0 or fetch2 == 1.0 and fetchPred2 == "Administrative Assistant" else "{}".format(f"You are more likely to become a {prediction[K-1]}. CONGRATULATIONS! :)"),
+                               prediction_label1 = "" if fetch2 == 0.0 or fetch1 == 0.0 and fetch2 == 0.0 and fetch3 == 0.0 and fetch4 == 0.0 or fetch2 == 1.0 and fetchPred2 == "Administrative Assistant" else "{}".format(f"You are more likely to become an {prediction[K-1]}. Congratulations!"),
                                prediction_label2 = "{}".format(f"Nothing follows...") if fetch1 == 0.0 and fetch3 == 0.0 and fetch4 == 0.0 else "",
                                job_label1 = "{}".format(f"{prediction[K-1]} = {fetch2}%") if fetch2 == 1.0 and fetchPred2 == "Administrative Assistant" else "",
                                job_label2 = "Not Applicable" if fetch1 == 0.0 and fetch2 == 0.0 and fetch3 == 0.0 and fetch4 == 0.0 or fetch2 == 1.0 and fetchPred2 == "Administrative Assistant" else "Predicted IT/CS Related Job(s)",
@@ -271,25 +275,29 @@ def predict_CS():
         prediction = [prediction.replace(predCS, '0')for prediction in prediction]
         prediction.append(predCS)
         
-        fetch1 = recall(actual, prediction, K)
-        fetch2 = recall(actual, prediction, K-1)
-        fetch3 = recall(actual, prediction, K-2)
-        fetch4 = recall(actual, prediction, K-3)
+        fetch1 = 0.0
+        fetch2 = 0.0
+        fetch3 = 0.0
+        fetch4 = 0.0
         
         fetchPred1 = prediction[0]
         fetchPred2 = prediction[-1]
         fetchPred3 = prediction[-2]
         fetchPred4 = prediction[-3]
         
-        return render_template("predictCS.html", 
-                               prediction_text1 = "" if fetch1 == 0.0 or fetch1 == 0.0 and fetch2 == 0.0 and fetch3 == 0.0 and fetch4 == 0.0 or fetch2 == 1.0 and predCS == "Administrative Assistant" or fetchPred1 == '0' else "{}".format(f"{prediction[K]} = {fetch1}%"), 
-                               prediction_text2 = "" if fetch2 == 0.0 or fetch1 == 0.0 and fetch2 == 0.0 and fetch3 == 0.0 and fetch4 == 0.0 or fetch2 == 1.0 and predCS == "Administrative Assistant" or fetchPred2 == '0' else "{}".format(f"{prediction[K-1]} = {fetch2}%"),
-                               prediction_text3 = "" if fetch3 == 0.0 or fetch1 == 0.0 and fetch2 == 0.0 and fetch3 == 0.0 and fetch4 == 0.0 or fetch2 == 1.0 and predCS == "Administrative Assistant" or fetchPred3 == '0' else "{}".format(f"{prediction[K-2]} = {fetch3}%"),
-                               prediction_text4 = "" if fetch4 == 0.0 or fetch1 == 0.0 and fetch2 == 0.0 and fetch3 == 0.0 and fetch4 == 0.0 or fetch2 == 1.0 and predCS == "Administrative Assistant" or fetchPred4 == '0' else "{}".format(f"{prediction[K-3]} = {fetch4}%"),
-                               label_text1 = "NOT APPLICABLE. Below are the courses must improve to increase the chances on landing IT/CS Related Job~~" if fetch1 == 0.0 and fetch2 == 0.0 and fetch3 == 0.0 and fetch4 == 0.0 else "",
-                               label_text2 = "NOT APPLICABLE. ~~Below are the courses must improve to increase the chances on landing IT/CS Related Job" if fetch2 == 1.0 and predCS == "Administrative Assistant" else "",
+        return render_template("CSend.html", 
+                               prediction_text1 = "" if fetch1 == 0.0 or fetch1 == 0.0 and fetch2 == 0.0 and fetch3 == 0.0 and fetch4 == 0.0 or fetch2 == 1.0 and fetchPred2 == "Administrative Assistant" or fetchPred1 == '0' else "{}".format(f"{prediction[K]} = {fetch1}%"), 
+                               prediction_text2 = "" if fetch2 == 0.0 or fetch1 == 0.0 and fetch2 == 0.0 and fetch3 == 0.0 and fetch4 == 0.0 or fetch2 == 1.0 and fetchPred2 == "Administrative Assistant" or fetchPred2 == '0' else "{}".format(f"{prediction[K-1]} = {fetch2}%"),
+                               prediction_text3 = "" if fetch3 == 0.0 or fetch1 == 0.0 and fetch2 == 0.0 and fetch3 == 0.0 and fetch4 == 0.0 or fetch2 == 1.0 and fetchPred2 == "Administrative Assistant" or fetchPred3 == '0' else "{}".format(f"{prediction[K-2]} = {fetch3}%"),
+                               prediction_text4 = "" if fetch4 == 0.0 or fetch1 == 0.0 and fetch2 == 0.0 and fetch3 == 0.0 and fetch4 == 0.0 or fetch2 == 1.0 and fetchPred2 == "Administrative Assistant" or fetchPred4 == '0' else "{}".format(f"{prediction[K-3]} = {fetch4}%"),
+                               prediction_label1 = "" if fetch2 == 0.0 or fetch1 == 0.0 and fetch2 == 0.0 and fetch3 == 0.0 and fetch4 == 0.0 or fetch2 == 1.0 and fetchPred2 == "Administrative Assistant" else "{}".format(f"{prediction[K-1]} is a more likely career path for you. Congratulations!"),
+                               prediction_label2 = "{}".format(f"Nothing follows...") if fetch1 == 0.0 and fetch3 == 0.0 and fetch4 == 0.0 else "",
+                               job_label1 = "{}".format(f"{prediction[K-1]} = {fetch2}%") if fetch2 == 1.0 and fetchPred2 == "Administrative Assistant" else "",
+                               job_label2 = "NOT APPLICABLE" if fetch1 == 0.0 and fetch2 == 0.0 and fetch3 == 0.0 and fetch4 == 0.0 or fetch2 == 1.0 and fetchPred2 == "Administrative Assistant" else "Predicted IT/CS Related Job(s)",
+                               label_text1 = "To increase the likelihood of finding IT/CS-related jobs, the courses on the right side must be improved.~~" if fetch1 == 0.0 and fetch2 == 0.0 and fetch3 == 0.0 and fetch4 == 0.0 else "",
+                               label_text2 = "~~To increase the likelihood of finding IT/CS-related jobs, the courses on the right side must be improved." if fetch2 == 1.0 and fetchPred2 == "Administrative Assistant" else "",
                                course_suggestion1 = "{}".format(suggestCS.tolist()) if fetch1 == 0.0 and fetch2 == 0.0 and fetch3 == 0.0 and fetch4 == 0.0 else "",
-                               course_suggestion2 = "{}".format(suggestCS.tolist()) if fetch2 == 1.0 and predCS == "Administrative Assistant" else "")
+                               course_suggestion2 = "{}".format(suggestCS.tolist()) if fetch2 == 1.0 and fetchPred2 == "Administrative Assistant" else "")
         
 if __name__ == "__main__":
     flask_app.run(debug=True)
